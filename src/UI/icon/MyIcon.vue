@@ -132,6 +132,131 @@
         fill-rule="evenodd"
       />
     </svg>
+    <svg
+      v-if="type === 'search'"
+      width="16.000000"
+      height="16.000000"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <desc>Created with Pixso.</desc>
+      <defs />
+      <path
+        id="Vector"
+        d="M11.88 11.87L15.25 15.25L11.88 11.87ZM11.88 11.88C10.68 13.07 9.06 13.75 7.37 13.75C5.68 13.75 4.06 13.07 2.86 11.88C1.67 10.68 1 9.06 1 7.37C1 5.68 1.67 4.06 2.86 2.86C4.06 1.67 5.68 1 7.37 1C9.06 1 10.68 1.67 11.88 2.86C13.07 4.06 13.75 5.68 13.75 7.37C13.75 9.06 13.07 10.68 11.88 11.88Z"
+        stroke="#E4E4E4"
+        stroke-opacity="1.000000"
+        stroke-width="2.000000"
+      />
+    </svg>
+    <svg
+      v-if="type === 'favorite'"
+      width="32.000000"
+      height="32.000000"
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <desc>Created with Pixso.</desc>
+      <defs>
+        <clipPath id="clip177855_5">
+          <rect
+            id="8666647_heart_icon 1"
+            width="16.000000"
+            height="16.000000"
+            transform="translate(8.000000 8.000000)"
+            fill="white"
+            fill-opacity="0"
+          />
+        </clipPath>
+      </defs>
+      <rect
+        id="Rectangle 21"
+        rx="7.000000"
+        width="32.000000"
+        height="32.000000"
+        fill="#FFFFFF"
+        fill-opacity="1.000000"
+      />
+      <rect
+        id="Rectangle 21"
+        x="0.500000"
+        y="0.500000"
+        rx="7.000000"
+        width="31.000000"
+        height="31.000000"
+        stroke="#F8F8F8"
+        stroke-opacity="1.000000"
+        stroke-width="1.000000"
+      />
+      <rect
+        id="Vector"
+        width="14.400000"
+        height="12.799999"
+        transform="translate(8.533325 9.599976)"
+        fill="#FFFFFF"
+        fill-opacity="0"
+      />
+      <rect
+        id="8666647_heart_icon 1"
+        width="16.000000"
+        height="16.000000"
+        transform="translate(8.000000 8.000000)"
+        fill="#FFFFFF"
+        fill-opacity="0"
+      />
+      <g clip-path="url(#clip177855_5)">
+        <path
+          id="Vector"
+          d="M20.67 10.27C20.22 10.09 19.74 10 19.26 10C18.78 10 18.3 10.09 17.86 10.27C17.41 10.46 17.01 10.73 16.67 11.07L15.96 11.78L15.26 11.07C14.57 10.38 13.64 10 12.66 10C11.69 10 10.76 10.38 10.07 11.07C9.38 11.76 9 12.69 9 13.66C9 14.64 9.38 15.57 10.07 16.26L10.78 16.96L15.96 22.15L21.15 16.96L21.86 16.26C22.2 15.92 22.47 15.51 22.65 15.07C22.84 14.62 22.93 14.14 22.93 13.66C22.93 13.18 22.84 12.7 22.65 12.26C22.47 11.81 22.2 11.41 21.86 11.07C21.52 10.73 21.11 10.46 20.67 10.27Z"
+          stroke="#EAEAEA"
+          stroke-opacity="1.000000"
+          stroke-width="1.200000"
+          stroke-linejoin="round"
+        />
+      </g>
+    </svg>
+    <svg
+      v-if="type === 'order'"
+      width="32.000000"
+      height="32.000000"
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <desc>Created with Pixso.</desc>
+      <defs />
+      <rect
+        id="Rectangle 22"
+        rx="8.000000"
+        width="32.000000"
+        height="32.000000"
+        fill="#FFFFFF"
+        fill-opacity="1.000000"
+      />
+      <rect
+        id="Rectangle 22"
+        x="0.500000"
+        y="0.500000"
+        rx="8.000000"
+        width="31.000000"
+        height="31.000000"
+        stroke="#F2F2F2"
+        stroke-opacity="1.000000"
+        stroke-width="1.000000"
+      />
+      <path
+        id="Vector"
+        d="M20.66 15.13L17.2 15.13L17.2 11.66C17.2 10.33 15.13 10.33 15.13 11.66L15.13 15.13L11.66 15.13C10.33 15.13 10.33 17.2 11.66 17.2L15.13 17.2L15.13 20.66C15.13 22 17.2 22 17.2 20.66L17.2 17.2L20.66 17.2C22 17.2 22 15.13 20.66 15.13Z"
+        fill="#D3D3D3"
+        fill-opacity="1.000000"
+        fill-rule="nonzero"
+      />
+    </svg>
   </div>
 </template>
 

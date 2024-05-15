@@ -22,11 +22,10 @@ import { defineComponent } from "vue";
 import MyIcon from "@/UI/icon/MyIcon.vue";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
 
-const MyNavigationMenu = defineComponent({
+defineComponent({
   components: { MyTypography, MyIcon },
   name: "MyNavigationMenu",
 });
-console.log(MyNavigationMenu);
 
 const navigationMenu = [
   { label: "0 руб.", icon: "cart" },
@@ -43,6 +42,4 @@ const navigationMenu = [
 
 .navigation-menu__item
   text-align: center
-
-
 </style>

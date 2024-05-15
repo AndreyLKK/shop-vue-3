@@ -1,18 +1,17 @@
 <template>
-  <div class="home">
-    <my-header></my-header>
-    <router-view></router-view>
-  </div>
+  <main class="main">
+    <my-catalog></my-catalog>
+  </main>
 </template>
 
-<script>
-import MyHeader from "@/сomponents/MyHeader.vue";
-export default {
+<script setup>
+import { defineComponent } from "vue";
+import MyCatalog from "@/сomponents/MyCatalog.vue";
+
+defineComponent({
+  сomponents: { MyCatalog },
   name: "MyHome",
-  components: {
-    MyHeader,
-  },
-};
+});
 </script>
 
 <style></style>

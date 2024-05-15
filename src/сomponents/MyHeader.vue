@@ -29,22 +29,25 @@ import MyIcon from "@/UI/icon/MyIcon.vue";
 import MyContainer from "@/UI/container/MyContainer.vue";
 import MyNavigationMenu from "@/сomponents/MyNavigationMenu.vue";
 
-const MyHeader = defineComponent({
+defineComponent({
   components: { MyTypography, MyNavigationMenu, MyIcon, MyContainer },
   name: "MyHeader",
 });
-console.log(MyHeader);
 </script>
 
 <style lang="sass" scoped>
 .header
-  padding-top: 43px
-
+  margin: 0 auto
+  &::before
+  border-bottom: 1px solid rgb(234, 234, 234)
+  max-width: 1080px
 
 .header__wrapper
   display: flex
   align-items: center
   justify-content: space-between
+  padding: 43px 0
+
 
 
 .header__logo-link

@@ -7,6 +7,7 @@
       `bold_${bold}`,
       `size_${size}`,
       `color_${color}`,
+      `height_${height}`
     ]"
   >
     <slot></slot>
@@ -61,10 +62,11 @@ export default {
 .size_xs
   font-size: 11px
 
-
 .size_m
   font-size: 20px
 
+.size_l
+  font-size: 39px
 
 .color_black
   color: rgb(0, 0, 0)
