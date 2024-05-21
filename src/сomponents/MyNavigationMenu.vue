@@ -4,7 +4,9 @@
       <button class="navigation-menu__btn" @click="toggleCart">
         <my-icon type="cart"></my-icon>
 
-        <my-typography class="navigation-menu__text">0 руб.</my-typography>
+        <my-typography class="navigation-menu__text"
+          >{{ totalPrice }} руб.</my-typography
+        >
       </button>
     </li>
 
@@ -27,7 +29,7 @@
 </template>
 
 <script setup>
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 import MyIcon from "@/UI/icon/MyIcon.vue";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
@@ -42,6 +44,8 @@ const store = useStore();
 const toggleCart = () => {
   store.dispatch("toggleCart/toggleCart");
 };
+
+const totalPrice = computed(() => store.getters["cartProducts/totalPrice"]);
 </script>
 
 <style lang="sass" scoped>

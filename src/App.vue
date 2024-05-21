@@ -1,15 +1,18 @@
 <template>
-  <my-cart></my-cart>
-  <div class="app">
-    <div class="app__inner">
-      <my-header></my-header>
-      <router-view></router-view>
+  <div>
+    <my-cart></my-cart>
+    <div class="app" :class="{ hidden: isCartOpen }">
+      <div class="app__inner">
+        <my-header></my-header>
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
+import { useStore } from "vuex";
 import MyHeader from "@/сomponents/MyHeader.vue";
 import MyCart from "@/сomponents/MyCart.vue";
 
@@ -17,13 +20,23 @@ defineComponent({
   сomponents: { MyHeader, MyCart },
   name: "MyApp",
 });
+
+const store = useStore();
+
+const isCartOpen = computed(() => store.getters["toggleCart/isCartOpen"]);
+
 </script>
 
 <style lang="sass" scoped>
+
 .app
   background-color: rgb(231, 246, 255)
   height: 100%
   padding: 85px 15px
+
+.hidden
+  overflow: hidden
+  height: 100vh
 
 .app__inner
   margin: 0 auto
