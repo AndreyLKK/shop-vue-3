@@ -1,24 +1,34 @@
 <template>
   <ul class="navigation-menu__list">
-    <li
-      class="navigation-menu__item"
-      v-for="item in navigationMenu"
-      :key="item.label"
-    >
-      <button class="navigation-menu__btn" v-if="item.label !== 'Закладки'">
-        <my-icon :type="item.icon"></my-icon>
-        <my-typography>{{ item.label }}</my-typography>
+    <li class="navigation-menu__item">
+      <button class="navigation-menu__btn" @click="toggleCart">
+        <my-icon type="cart"></my-icon>
+
+        <my-typography class="navigation-menu__text">0 руб.</my-typography>
       </button>
-      <router-link class="navigation-menu__link" to="/bookmarks" v-else>
-        <my-icon :type="item.icon"></my-icon>
-        <my-typography>{{ item.label }}</my-typography>
+    </li>
+
+    <li class="navigation-menu__item">
+      <router-link class="navigation-menu__link" to="/bookmarks">
+        <my-icon type="bookmarks"></my-icon>
+
+        <my-typography class="navigation-menu__text">Закладки</my-typography>
       </router-link>
+    </li>
+
+    <li class="navigation-menu__item">
+      <button class="navigation-menu__btn">
+        <my-icon type="profile"></my-icon>
+
+        <my-typography class="navigation-menu__text">Профиль</my-typography>
+      </button>
     </li>
   </ul>
 </template>
 
 <script setup>
 import { defineComponent } from "vue";
+import { useStore } from "vuex";
 import MyIcon from "@/UI/icon/MyIcon.vue";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
 
@@ -27,11 +37,11 @@ defineComponent({
   name: "MyNavigationMenu",
 });
 
-const navigationMenu = [
-  { label: "0 руб.", icon: "cart" },
-  { label: "Закладки", icon: "bookmarks" },
-  { label: "Профиль", icon: "profile" },
-];
+const store = useStore();
+
+const toggleCart = () => {
+  store.dispatch("toggleCart/toggleCart");
+};
 </script>
 
 <style lang="sass" scoped>
@@ -42,4 +52,19 @@ const navigationMenu = [
 
 .navigation-menu__item
   text-align: center
+
+
+.navigation-menu__text
+  transition: font-weight color 0.3s
+
+  &:hover
+    font-weight: 700
+    color: rgb(92, 92, 92)
+
+
+.navigation-menu__btn,
+.navigation-menu__link
+  display: flex
+  grid-gap: 8px
+  align-items: center
 </style>

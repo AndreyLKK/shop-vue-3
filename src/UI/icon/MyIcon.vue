@@ -220,6 +220,33 @@
       </g>
     </svg>
     <svg
+      v-if="type === 'not-favorite'"
+      width="32.000000"
+      height="32.000000"
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <desc>Created with Pixso.</desc>
+      <defs />
+      <rect
+        id="Rectangle 21"
+        rx="7.000000"
+        width="32.000000"
+        height="32.000000"
+        fill="#FEF0F0"
+        fill-opacity="1.000000"
+      />
+      <path
+        id="Vector"
+        d="M22.58 12.22C22.36 11.7 22.03 11.24 21.63 10.85C21.23 10.46 20.75 10.14 20.23 9.93C19.69 9.71 19.11 9.59 18.52 9.59C17.7 9.59 16.9 9.82 16.2 10.24C16.04 10.34 15.88 10.45 15.73 10.57C15.58 10.45 15.42 10.34 15.25 10.24C14.56 9.82 13.76 9.59 12.93 9.59C12.34 9.59 11.77 9.71 11.23 9.93C10.7 10.15 10.23 10.46 9.83 10.85C9.42 11.24 9.1 11.7 8.88 12.22C8.65 12.75 8.53 13.32 8.53 13.9C8.53 14.45 8.64 15.03 8.87 15.61C9.06 16.1 9.33 16.61 9.67 17.12C10.22 17.93 10.97 18.77 11.9 19.62C13.45 21.04 14.98 22.02 15.05 22.06L15.44 22.31C15.62 22.42 15.84 22.42 16.02 22.31L16.41 22.06C16.48 22.02 18.01 21.04 19.55 19.62C20.49 18.77 21.24 17.93 21.79 17.12C22.13 16.61 22.4 16.1 22.59 15.61C22.82 15.03 22.93 14.45 22.93 13.9C22.93 13.32 22.81 12.75 22.58 12.22Z"
+        fill="#FF8585"
+        fill-opacity="1.000000"
+        fill-rule="nonzero"
+      />
+    </svg>
+    <svg
       v-if="type === 'order'"
       width="32.000000"
       height="32.000000"
@@ -255,6 +282,202 @@
         fill="#D3D3D3"
         fill-opacity="1.000000"
         fill-rule="nonzero"
+      />
+    </svg>
+    <svg
+      v-if="type === 'not-order'"
+      width="32.000000"
+      height="32.000000"
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <desc>Created with Pixso.</desc>
+      <defs>
+        <filter
+          id="filter_60_204_dd"
+          x="10.666504"
+          y="11.329834"
+          width="10.669769"
+          height="10.513245"
+          filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dx="0" dy="2" />
+          <feGaussianBlur stdDeviation="0" />
+          <feComposite in2="hardAlpha" operator="out" k2="-1" k3="1" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="BackgroundImageFix"
+            result="effect_dropShadow_1"
+          />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="effect_dropShadow_1"
+            result="shape"
+          />
+        </filter>
+        <clipPath id="clip60_202">
+          <rect
+            id="bi:check-lg"
+            width="10.666666"
+            height="10.666666"
+            transform="translate(10.666687 10.666687)"
+            fill="white"
+            fill-opacity="0"
+          />
+        </clipPath>
+        <linearGradient
+          x1="16.000000"
+          y1="0.000000"
+          x2="16.000000"
+          y2="32.000000"
+          id="paint_linear_60_201_0"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#89F09C" />
+          <stop offset="1.000000" stop-color="#3CC755" />
+        </linearGradient>
+      </defs>
+      <rect
+        id="Rectangle 22"
+        rx="8.000000"
+        width="32.000000"
+        height="32.000000"
+        fill="url(#paint_linear_60_201_0)"
+        fill-opacity="1.000000"
+      />
+      <rect
+        id="bi:check-lg"
+        width="10.666666"
+        height="10.666666"
+        transform="translate(10.666687 10.666687)"
+        fill="#FFFFFF"
+        fill-opacity="0"
+      />
+      <g clip-path="url(#clip60_202)">
+        <g filter="url(#filter_60_204_dd)">
+          <path
+            id="Vector"
+            d="M19.65 11.62C19.83 11.43 20.08 11.33 20.34 11.32C20.6 11.32 20.85 11.42 21.04 11.61C21.22 11.79 21.33 12.03 21.33 12.29C21.33 12.55 21.24 12.8 21.05 12.99L15.83 19.52C15.74 19.62 15.63 19.7 15.51 19.75C15.39 19.81 15.26 19.84 15.13 19.84C14.99 19.84 14.86 19.82 14.74 19.77C14.62 19.72 14.51 19.64 14.41 19.55L10.95 16.09C10.76 15.9 10.66 15.65 10.66 15.39C10.66 15.13 10.77 14.88 10.95 14.7C11.13 14.51 11.38 14.41 11.64 14.41C11.9 14.41 12.15 14.51 12.34 14.7L15.08 17.44L19.63 11.65C19.63 11.64 19.64 11.63 19.65 11.62L19.65 11.62Z"
+            fill="#FFFFFF"
+            fill-opacity="1.000000"
+            fill-rule="nonzero"
+          />
+        </g>
+      </g>
+    </svg>
+    <svg
+      v-if="type === 'cross'"
+      width="32.000000"
+      height="32.000000"
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <desc>Created with Pixso.</desc>
+      <defs />
+      <rect
+        id="Rectangle 22"
+        rx="8.000000"
+        width="32.000000"
+        height="32.000000"
+        fill="#FFFFFF"
+        fill-opacity="1.000000"
+      />
+      <rect
+        id="Rectangle 22"
+        x="0.500000"
+        y="0.500000"
+        rx="8.000000"
+        width="31.000000"
+        height="31.000000"
+        stroke="#DBDBDB"
+        stroke-opacity="1.000000"
+        stroke-width="1.000000"
+      />
+      <path
+        id="Vector"
+        d="M20.07 18.61L17.63 16.16L20.07 13.71C21.02 12.77 19.55 11.3 18.61 12.25L16.16 14.7L13.71 12.25C12.77 11.3 11.3 12.77 12.25 13.71L14.7 16.16L12.25 18.61C11.3 19.55 12.77 21.02 13.71 20.07L16.16 17.63L18.61 20.07C19.55 21.02 21.02 19.55 20.07 18.61Z"
+        fill="#B5B5B5"
+        fill-opacity="1.000000"
+        fill-rule="nonzero"
+      />
+    </svg>
+
+    <svg
+      v-if="type === 'design-arrow'"
+      width="16.000000"
+      height="15.000000"
+      viewBox="0 0 16 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <desc>Created with Pixso.</desc>
+      <defs />
+      <path
+        id="Vector"
+        d="M1 7L14.71 7"
+        stroke="#FFFFFF"
+        stroke-opacity="1.000000"
+        stroke-width="2.000000"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+      />
+      <path
+        id="Vector"
+        d="M8.71 1L14.71 7L8.71 13"
+        stroke="#FFFFFF"
+        stroke-opacity="1.000000"
+        stroke-width="2.000000"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+      />
+    </svg>
+
+    <svg
+      v-if="type === 'back-cart-arrow'"
+      width="16.000000"
+      height="15.000000"
+      viewBox="0 0 16 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <desc>Created with Pixso.</desc>
+      <defs />
+      <path
+        id="Vector"
+        d="M1 7L14.71 7"
+        stroke="#000"
+        stroke-opacity="1.000000"
+        stroke-width="2.000000"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+      />
+      <path
+        id="Vector"
+        d="M8.71 1L14.71 7L8.71 13"
+        stroke="#000"
+        stroke-opacity="1.000000"
+        stroke-width="2.000000"
+        stroke-linejoin="round"
+        stroke-linecap="round"
       />
     </svg>
   </div>

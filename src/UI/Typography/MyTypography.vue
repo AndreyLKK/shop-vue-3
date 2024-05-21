@@ -7,7 +7,7 @@
       `bold_${bold}`,
       `size_${size}`,
       `color_${color}`,
-      `height_${height}`
+      `height_${height}`,
     ]"
   >
     <slot></slot>
@@ -58,14 +58,19 @@ export default {
 .bold_bold
   font-weight: 700
 
-
 .size_xs
   font-size: 11px
+
+.size_s
+  font-size: 16px
 
 .size_m
   font-size: 20px
 
 .size_l
+  font-size: 24px
+
+.size_xl
   font-size: 39px
 
 .color_black
@@ -79,6 +84,9 @@ export default {
 .color_platinum
   color: rgb(189, 189, 189)
 
+.color_white
+  color: rgb(255, 255, 255)
+
 .height_xs
   line-height: 13px
 
@@ -86,8 +94,14 @@ export default {
   line-height: 17px
 
 .height_m
-  line-height: 24px
+  line-height: 19px
 
 .height_l
+  line-height: 24px
+
+.height_xl
+  line-height: 29px
+
+.height_xxl
   line-height: 39px
 </style>

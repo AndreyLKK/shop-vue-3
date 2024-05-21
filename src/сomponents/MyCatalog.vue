@@ -2,7 +2,7 @@
   <div class="catalog">
     <my-container>
       <div class="catalog__inner">
-        <my-typography tag="h2" bold="bold" size="l" height="l"
+        <my-typography tag="p" bold="bold" size="xl" height="xxl" color="black"
           >Все кроссовки</my-typography
         >
         <div class="catalog__input">
@@ -36,7 +36,7 @@ defineComponent({
 </script>
 
 <style lang="sass" scoped>
-.catalog  
+.catalog
   padding-top: 39px
 
 .catalog__inner

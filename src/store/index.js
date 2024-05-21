@@ -1,9 +1,10 @@
 import { createStore } from "vuex";
+import toggleCart from "./modules/toggleCart.js";
+import cartProducts from "./modules/cartProducts.js";
 
 export default createStore({
-  state: {},
-  getters: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+  modules: {
+    toggleCart,
+    cartProducts,
+  },
 });

@@ -7,7 +7,7 @@
             <div class="header__logo">
               <my-icon type="logo"></my-icon>
             </div>
-            <my-typography tag="h1" bold="bold" size="m"
+            <my-typography tag="h1" bold="bold" size="s" color="black"
               >VUE SNEAKERS</my-typography
             >
             <my-typography tag="span">Магазин лучших кроссовок</my-typography>
