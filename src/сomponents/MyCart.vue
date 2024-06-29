@@ -150,11 +150,11 @@ const toggleCart = () => {
   store.dispatch("toggleCart/toggleCart");
 };
 
-const cartProducts = computed(() => store.getters["cartProducts/cartProducts"]);
+let cartProducts = computed(() => store.getters["cartProducts/cartProducts"]);
 
 function removeCartProduct(product) {
-  store.commit("cartProducts/removeItemFromCartProducts", product);
   store.commit("cartProducts/toggleIconOrder", product);
+  store.commit("cartProducts/removeItemFromCartProducts", product);
 }
 
 const totalPrice = computed(() => store.getters["cartProducts/totalPrice"]);
@@ -170,6 +170,12 @@ const cartWindowRef = ref(null);
 
 onMounted(() => {
   document.addEventListener("click", handleClickOutside);
+  const localStoragePurchaseData =
+    JSON.parse(localStorage.getItem("purchase")) || [];
+
+  localStoragePurchaseData.forEach((element) => {
+    cartProducts.value.push(element);
+  });
 });
 
 function handleClickOutside(event) {

@@ -76,10 +76,8 @@ export default {
 .color_black
   color: rgb(0, 0, 0)
 
-
 .color_graphite
   color: rgb(92, 92, 92)
-
 
 .color_platinum
   color: rgb(189, 189, 189)

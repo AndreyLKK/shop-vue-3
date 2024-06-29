@@ -12,6 +12,7 @@ const getters = {
 const mutations = {
   addItemToCartProduts: (state, product) => {
     state.cartProducts.push(product);
+    localStorage.setItem("purchase", JSON.stringify(state.cartProducts));
   },
 
   removeItemFromCartProducts: (state, product) => {
@@ -21,21 +22,17 @@ const mutations = {
     if (index !== -1) {
       state.cartProducts.splice(index, 1);
     }
+    localStorage.setItem("purchase", JSON.stringify(state.cartProducts));
   },
 
   toggleIconOrder: (state, product) => {
-    if (product.iconOrder === "order") {
-      product.iconOrder = "not-order";
-    } else {
-      product.iconOrder = "order";
-    }
+    product.iconOrder = product.iconOrder === "order" ? "not-order" : "order";
   },
 
   emptyingTheTrash: (state) => {
     state.cartProducts.length = 0;
+    localStorage.setItem("purchase", JSON.stringify(state.cartProducts));
   },
-
-
 };
 
 const actions = {};

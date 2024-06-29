@@ -48,8 +48,6 @@ defineComponent({
   justify-content: space-between
   padding: 43px 0
 
-
-
 .header__logo-link
   display: grid
   grid-template-columns: auto auto

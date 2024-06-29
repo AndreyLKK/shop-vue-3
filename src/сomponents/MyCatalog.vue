@@ -5,12 +5,17 @@
         <my-typography tag="p" bold="bold" size="xl" height="xxl" color="black"
           >Все кроссовки</my-typography
         >
-        <div class="catalog__input">
-          <my-input placeholder="Поиск..." iconPosition="left">
-            <template #iconLeft>
-              <my-icon type="search"></my-icon>
-            </template>
-          </my-input>
+        <div class="catalog__actions">
+          <div class="catalog__drop-list">
+            <my-select></my-select>
+          </div>
+          <div class="catalog__input">
+            <my-input placeholder="Поиск..." iconPosition="left">
+              <template #iconLeft>
+                <my-icon type="search"></my-icon>
+              </template>
+            </my-input>
+          </div>
         </div>
       </div>
       <div class="catalog__menu">
@@ -28,9 +33,10 @@ import MyInput from "@/UI/input/MyInput.vue";
 import MyIcon from "@/UI/icon/MyIcon.vue";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
 import MyCards from "@/сomponents/MyCards.vue";
+import MySelect from "@/UI/select/MySelect.vue";
 
 defineComponent({
-  сomponents: { MyContainer, MyInput, MyIcon, MyTypography, MyCards },
+  сomponents: { MyContainer, MyInput, MyIcon, MyTypography, MyCards, MySelect },
   name: "MyCatalog",
 });
 </script>
@@ -44,6 +50,9 @@ defineComponent({
   align-items: center
   justify-content: space-between
 
+.catalog__actions 
+  display: flex
+  grid-gap: 40px
 
 .catalog__input
   max-width: 250px
