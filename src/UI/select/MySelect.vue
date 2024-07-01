@@ -1,5 +1,10 @@
 <template>
-  <select name="" id="" class="select">
+  <select
+    name="select-product"
+    class="select"
+    @change="selectionHandler($event.target.value)"
+    :vlaue='modelValue'
+  >
     <option
       :value="sortingOption.value"
       class="select__option"
@@ -12,28 +17,37 @@
 </template>
 
 <script setup>
-import { defineComponent, defineProps } from "vue";
+import { defineComponent, defineProps, defineEmits } from "vue";
 
 defineComponent({
   name: "MySelect",
 });
 
-defineProps({});
+defineProps({
+  modelValue: String,
+});
 
 const sortingOptions = [
   {
     title: "Не выбрано",
-    value: "1",
+    value: "standart",
   },
   {
     title: "По названию",
-    value: "2",
+    value: "title",
   },
   {
     title: "По цене",
-    value: "3",
+    value: "price",
   },
 ];
+
+const emit = defineEmits(["update:modelValue"]);
+
+const selectionHandler = (value) => {
+  emit("update:modelValue", value);
+
+};
 </script>
 
 <style lang="sass" scoped>

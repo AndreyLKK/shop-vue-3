@@ -8,6 +8,8 @@
       :class="['input', `iconPosition_${iconPosition}`]"
       :placeholder="placeholder"
       type="text"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
     <div v-if="iconPosition === 'right'" class="icon-right">
       <slot name="iconRight"></slot>
@@ -29,6 +31,10 @@ defineProps({
   },
 
   iconPosition: {
+    type: String,
+  },
+
+  modelValue: {
     type: String,
   },
 });

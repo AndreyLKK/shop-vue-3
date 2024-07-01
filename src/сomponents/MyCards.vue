@@ -29,8 +29,10 @@ defineComponent({
   name: "MyCards",
 });
 
-defineProps({
+const props = defineProps({
   products: Array,
+  sortingOption: String,
+  filter: String,
 });
 
 const store = useStore();
@@ -116,6 +118,46 @@ watch(
   },
   { deep: true }
 );
+
+watch(
+  () => props.sortingOption,
+  (newSortingOption) => {
+    sortProducts(newSortingOption);
+  }
+);
+
+const sortProducts = (newSortingOption) => {
+  if (newSortingOption === "title") {
+    return products.value.sort((a, b) => a.title.localeCompare(b.title));
+  }
+  if (newSortingOption === "price") {
+    return products.value.sort((a, b) => a.price - b.price);
+  }
+  return products.value.sort((a, b) => a.id - b.id);
+};
+
+watch(
+  () => props.filter,
+  (newFilter) => {
+    filterProducts(newFilter);
+  }
+);
+
+const originalProducts = ref([]);
+
+const filterProducts = (newFilter) => {
+  if (!originalProducts.value.length) {
+    originalProducts.value = [...products.value];
+  }
+
+  if (newFilter) {
+    products.value = originalProducts.value.filter((product) =>
+      product.title.toLowerCase().includes(newFilter.toLowerCase())
+    );
+  } else {
+    products.value = [...originalProducts.value];
+  }
+};
 </script>
 
 <style lang="sass" scoped>
