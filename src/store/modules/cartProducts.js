@@ -19,6 +19,7 @@ const mutations = {
     const index = state.cartProducts.findIndex(
       (item) => item.id === product.id
     );
+
     if (index !== -1) {
       state.cartProducts.splice(index, 1);
     }

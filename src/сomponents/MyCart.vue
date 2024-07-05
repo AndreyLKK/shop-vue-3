@@ -1,133 +1,136 @@
 <template>
-  <div class="cart" v-if="isCartOpen">
+  <div class="cart" v-show="isCartOpen">
     <div class="cart__backdrop" ref="backdrop"></div>
-    <div class="cart__window" ref="cartWindowRef" @click.stop>
-      <div class="cart__title">
-        <my-icon type="back-cart-arrow" @click="toggleCart"></my-icon>
-        <my-typography tag="p" size="l" height="l" bold="bold" color="black">
-          Корзина
-        </my-typography>
-      </div>
+    <transition name="cart__windows">
+      <div class="cart__window" ref="cartWindowRef" @click.stop>
+        <div class="cart__title">
+          <my-icon type="back-cart-arrow" @click="toggleCart"></my-icon>
+          <my-typography tag="p" size="l" height="l" bold="bold" color="black">
+            Корзина
+          </my-typography>
+        </div>
 
-      <ul class="cart__list">
-        <li
-          class="cart__item"
-          v-for="cartProduct in cartProducts"
-          :key="cartProduct.id"
-        >
+        <ul class="cart__list">
+          <li
+            class="cart__item"
+            v-for="cartProduct in cartProducts"
+            :key="cartProduct.id"
+          >
+            <img
+              class="cart__img"
+              :src="require(`@/assets/img${cartProduct.imageUrl}`)"
+              alt=""
+            />
+            <div class="cart__item-info">
+              <my-typography tag="p" color="black">{{
+                cartProduct.title
+              }}</my-typography>
+              <my-typography tag="p" color="black" bold="bold"
+                >{{ cartProduct.price }} руб.</my-typography
+              >
+            </div>
+            <button class="cart__btn">
+              <my-icon
+                type="cross"
+                @click="removeCartProduct(cartProduct)"
+              ></my-icon>
+            </button>
+          </li>
+        </ul>
+
+        <div class="cart__footer" v-if="cartProducts.length">
+          <div class="cart__footer-info">
+            <my-typography tag="p" color="black" size="s" height="m"
+              >Итого:
+            </my-typography>
+            <span class="cart__footer-dot"></span>
+            <my-typography tag="p" color="black" size="s" height="m"
+              >{{ totalPrice }} руб.
+            </my-typography>
+          </div>
+          <div class="cart__footer-info">
+            <my-typography tag="p" color="black" size="s" height="m"
+              >Налог 5%:
+            </my-typography>
+            <span class="cart__footer-dot"></span>
+            <my-typography tag="p" color="black" size="s" height="m"
+              >{{ taxAmount }} руб.
+            </my-typography>
+          </div>
+          <button class="cart-footer-btn" @click="placingOrder">
+            <my-typography
+              tag="span"
+              color="white"
+              bold="bold"
+              size="s"
+              height="m"
+              >Оформить заказ</my-typography
+            >
+            <div class="cart__footer-icon">
+              <my-icon type="design-arrow"></my-icon>
+            </div>
+          </button>
+        </div>
+
+        <div class="cart__status" v-else-if="orderIsProcessed">
           <img
-            class="cart__img"
-            :src="require(`@/assets/img${cartProduct.imageUrl}`)"
+            class="cart__status-img"
+            src="@/assets/img/order-processed.png"
             alt=""
           />
-          <div class="cart__item-info">
-            <my-typography tag="p" color="black">{{
-              cartProduct.title
-            }}</my-typography>
-            <my-typography tag="p" color="black" bold="bold"
-              >{{ cartProduct.price }} руб.</my-typography
-            >
-          </div>
-          <button class="cart__btn">
-            <my-icon
-              type="cross"
-              @click="removeCartProduct(cartProduct)"
-            ></my-icon>
-          </button>
-        </li>
-      </ul>
-
-      <div class="cart__footer" v-if="cartProducts.length">
-        <div class="cart__footer-info">
-          <my-typography tag="p" color="black" size="s" height="m"
-            >Итого:
-          </my-typography>
-          <span class="cart__footer-dot"></span>
-          <my-typography tag="p" color="black" size="s" height="m"
-            >{{ totalPrice }} руб.
-          </my-typography>
-        </div>
-        <div class="cart__footer-info">
-          <my-typography tag="p" color="black" size="s" height="m"
-            >Налог 5%:
-          </my-typography>
-          <span class="cart__footer-dot"></span>
-          <my-typography tag="p" color="black" size="s" height="m"
-            >{{ taxAmount }} руб.
-          </my-typography>
-        </div>
-        <button class="cart-footer-btn" @click="placingOrder">
           <my-typography
-            tag="span"
-            color="white"
+            class="cart__status-title"
+            tag="p"
             bold="bold"
-            size="s"
-            height="m"
-            >Оформить заказ</my-typography
+            color="black"
+            size="m"
+            height="l"
+            >Заказ оформлен!</my-typography
           >
-          <div class="cart__footer-icon">
-            <my-icon type="design-arrow"></my-icon>
-          </div>
-        </button>
-      </div>
+          <my-typography class="cart__status-text" tag="p" size="s" height="l"
+            >Ваш заказ #18 скоро будет передан курьерской
+            доставке</my-typography
+          >
+          <button class="cart__status-btn" type="button" @click="toggleCart">
+            <my-typography tag="span" color="white" bold="bold" height="m"
+              >Вернуться назад</my-typography
+            >
+            <div class="cart__status-icon">
+              <my-icon type="design-arrow"></my-icon>
+            </div>
+          </button>
+        </div>
 
-      <div class="cart__status" v-else-if="orderIsProcessed">
-        <img
-          class="cart__status-img"
-          src="@/assets/img/order-processed.png"
-          alt=""
-        />
-        <my-typography
-          class="cart__status-title"
-          tag="p"
-          bold="bold"
-          color="black"
-          size="m"
-          height="l"
-          >Заказ оформлен!</my-typography
-        >
-        <my-typography class="cart__status-text" tag="p" size="s" height="l"
-          >Ваш заказ #18 скоро будет передан курьерской доставке</my-typography
-        >
-        <button class="cart__status-btn" type="button" @click="toggleCart">
-          <my-typography tag="span" color="white" bold="bold" height="m"
-            >Вернуться назад</my-typography
+        <div class="cart__status" v-else>
+          <img
+            class="cart__status-img"
+            src="@/assets/img/cart-empty.png"
+            alt=""
+          />
+          <my-typography
+            class="cart__status-title"
+            tag="p"
+            bold="bold"
+            color="black"
+            size="m"
+            height="l"
+            >Корзина пуста</my-typography
           >
-          <div class="cart__status-icon">
-            <my-icon type="design-arrow"></my-icon>
-          </div>
-        </button>
-      </div>
-
-      <div class="cart__status" v-else>
-        <img
-          class="cart__status-img"
-          src="@/assets/img/cart-empty.png"
-          alt=""
-        />
-        <my-typography
-          class="cart__status-title"
-          tag="p"
-          bold="bold"
-          color="black"
-          size="m"
-          height="l"
-          >Корзина пуста</my-typography
-        >
-        <my-typography class="cart__status-text" tag="p" size="s" height="l"
-          >Добавьте хотя бы одну пару кроссовок, чтобы сделать
-          заказ.</my-typography
-        >
-        <button class="cart__status-btn" type="button" @click="toggleCart">
-          <my-typography tag="span" color="white" bold="bold" height="m"
-            >Вернуться назад</my-typography
+          <my-typography class="cart__status-text" tag="p" size="s" height="l"
+            >Добавьте хотя бы одну пару кроссовок, чтобы сделать
+            заказ.</my-typography
           >
-          <div class="cart__status-icon">
-            <my-icon type="design-arrow"></my-icon>
-          </div>
-        </button>
+          <button class="cart__status-btn" type="button" @click="toggleCart">
+            <my-typography tag="span" color="white" bold="bold" height="m"
+              >Вернуться назад</my-typography
+            >
+            <div class="cart__status-icon">
+              <my-icon type="design-arrow"></my-icon>
+            </div>
+          </button>
+        </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -195,7 +198,6 @@ function placingOrder() {
 </script>
 
 <style lang="sass" scoped>
-
 .cart__backdrop
   width: 100%
   height: 100vh
@@ -203,6 +205,7 @@ function placingOrder() {
   opacity: 0.5
   position: fixed
   z-index: 10
+
 
 .cart__title
   display: flex
@@ -227,6 +230,26 @@ function placingOrder() {
   flex-direction: column
   grid-gap: 30px
   overflow-y: auto
+
+
+
+.cart__windows-enter-active,
+.cart__windows-leave-active
+  transition: opacity 0.5s ease, transform 0.5s ease
+
+
+.cart__windows-enter-from,
+.cart__windows-leave-to
+  opacity: 0
+  transform: translateX(100%)
+
+
+.cart__windows-enter-to,
+.cart__windows-leave-from
+  opacity: 1
+  transform: translateX(0%)
+
+
 
 .cart__status
   display: flex
@@ -283,7 +306,7 @@ function placingOrder() {
   cursor: pointer
 
 .cart__footer
-   margin-top: auto
+  margin-top: auto
 
 .cart__footer-info
   display: flex

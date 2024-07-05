@@ -43,8 +43,6 @@ const changeFavorite = (productId) => {
 onMounted(() => {
   store.dispatch("bookmarksProducts/initializeBookmarksProducts");
 });
-
-
 </script>
 
 <style lang="sass" scoped>

@@ -43,6 +43,7 @@ async function waitingData() {
   products.value = await fetchData();
   const orderStatus = JSON.parse(localStorage.getItem("purchase")) || [];
   const favoriteStatus = JSON.parse(localStorage.getItem("bookmarks")) || [];
+  store.dispatch("bookmarksProducts/initializeBookmarksProducts");
 
   products.value.forEach((product) => {
     const isFavorite = favoriteStatus.find((item) => item.id === product.id);
@@ -60,9 +61,9 @@ onMounted(() => {
   waitingData();
 });
 
-const changeFavorite = (productId) => {
+const changeFavorite = (product) => {
   const favoriteProduct = products.value.find((item) => {
-    return item.id === productId;
+    return item.id === product.id;
   });
 
   if (favoriteProduct) {
@@ -73,7 +74,11 @@ const changeFavorite = (productId) => {
         favoriteProduct
       );
     } else {
-      // favoriteProduct.iconFavorite = "favorite";
+      store.commit("bookmarksProducts/toggleIconFavorite", favoriteProduct);
+      store.commit(
+        "bookmarksProducts/removeItemFromBookmarksProduts",
+        favoriteProduct
+      );
     }
   }
 };

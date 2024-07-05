@@ -2,7 +2,7 @@
   <li class="cards__item">
     <my-icon
       :type="product.iconFavorite"
-      @click="changeFavorite(product.id)"
+      @click="changeFavorite(product)"
     ></my-icon>
 
     <div class="cards__img">

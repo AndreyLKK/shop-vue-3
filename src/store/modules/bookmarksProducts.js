@@ -17,9 +17,11 @@ const mutations = {
   },
 
   removeItemFromBookmarksProduts: (state, product) => {
-    const index = state.bookmarksProducts.findIndex(
-      (item) => item.id === product
-    );
+ 
+    const index = state.bookmarksProducts.findIndex((item) => {
+      console.log(product.id);
+      return item.id == product.id;
+    });
 
     if (index !== -1) {
       state.bookmarksProducts.splice(index, 1);
@@ -40,6 +42,7 @@ const actions = {
   initializeBookmarksProducts({ commit }) {
     const localStorageBookmarksData =
       JSON.parse(localStorage.getItem("bookmarks")) || [];
+
     commit("setBookmarksProducts", localStorageBookmarksData);
   },
 };
