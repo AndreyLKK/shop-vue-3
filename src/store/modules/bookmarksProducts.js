@@ -17,9 +17,7 @@ const mutations = {
   },
 
   removeItemFromBookmarksProduts: (state, product) => {
- 
     const index = state.bookmarksProducts.findIndex((item) => {
-      console.log(product.id);
       return item.id == product.id;
     });
 

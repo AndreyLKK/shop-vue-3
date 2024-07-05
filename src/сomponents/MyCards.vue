@@ -20,7 +20,6 @@ import {
   defineProps,
 } from "vue";
 import { useStore } from "vuex";
-
 import MyCard from "@/сomponents/MyCard.vue";
 import { fetchData } from "@/api/productCards.js";
 
@@ -38,64 +37,58 @@ const props = defineProps({
 const store = useStore();
 
 let products = ref([]);
-
-async function waitingData() {
-  products.value = await fetchData();
-  const orderStatus = JSON.parse(localStorage.getItem("purchase")) || [];
-  const favoriteStatus = JSON.parse(localStorage.getItem("bookmarks")) || [];
-  store.dispatch("bookmarksProducts/initializeBookmarksProducts");
-
-  products.value.forEach((product) => {
-    const isFavorite = favoriteStatus.find((item) => item.id === product.id);
-    const isOrdered = orderStatus.find((item) => item.id === product.id);
-    if (isOrdered) {
-      product.iconOrder = "not-order";
-    }
-    if (isFavorite) {
-      product.iconFavorite = "not-favorite";
-    }
-  });
-}
+const originalProducts = ref([]);
 
 onMounted(() => {
   waitingData();
 });
 
-const changeFavorite = (product) => {
-  const favoriteProduct = products.value.find((item) => {
-    return item.id === product.id;
-  });
+async function waitingData() {
+  products.value = await fethcProducts();
+  const orderStatus = getLocalStorageData("purchase");
+  const favoriteStatus = getLocalStorageData("bookmarks");
 
-  if (favoriteProduct) {
-    if (favoriteProduct.iconFavorite === "favorite") {
-      store.commit("bookmarksProducts/toggleIconFavorite", favoriteProduct);
-      store.commit(
-        "bookmarksProducts/addItemToBookmarksProduts",
-        favoriteProduct
-      );
-    } else {
-      store.commit("bookmarksProducts/toggleIconFavorite", favoriteProduct);
-      store.commit(
-        "bookmarksProducts/removeItemFromBookmarksProduts",
-        favoriteProduct
-      );
-    }
+  store.dispatch("bookmarksProducts/initializeBookmarksProducts");
+
+  initializeProductStatuses(orderStatus, favoriteStatus);
+}
+
+async function fethcProducts() {
+  return await fetchData();
+}
+
+const getLocalStorageData = (key) => {
+  return JSON.parse(localStorage.getItem(key)) || [];
+};
+
+const initializeProductStatuses = (orderStatus, favoriteStatus) => {
+  return products.value.map((product) => {
+    product.iconOrder = orderStatus.find((item) => item.id === product.id)
+      ? "not-order"
+      : "order";
+    product.iconFavorite = favoriteStatus.find((item) => item.id === product.id)
+      ? "not-favorite"
+      : "favorite";
+  });
+};
+
+const changeFavorite = (product) => {
+  if (product.iconFavorite === "favorite") {
+    store.commit("bookmarksProducts/toggleIconFavorite", product);
+    store.commit("bookmarksProducts/addItemToBookmarksProduts", product);
+  } else {
+    store.commit("bookmarksProducts/toggleIconFavorite", product);
+    store.commit("bookmarksProducts/removeItemFromBookmarksProduts", product);
   }
 };
 
-const changeCarts = (productId) => {
-  const toggleAddCart = products.value.find((item) => {
-    return item.id === productId;
-  });
-
-  if (toggleAddCart) {
-    if (toggleAddCart.iconOrder === "order") {
-      store.commit("cartProducts/toggleIconOrder", toggleAddCart);
-      store.commit("cartProducts/addItemToCartProduts", toggleAddCart);
-    } else {
-      store.commit("cartProducts/toggleIconOrder", toggleAddCart);
-      store.commit("cartProducts/removeItemFromCartProducts", toggleAddCart);
-    }
+const changeCarts = (product) => {
+  if (product.iconOrder === "order") {
+    store.commit("cartProducts/toggleIconOrder", product);
+    store.commit("cartProducts/addItemToCartProduts", product);
+  } else {
+    store.commit("cartProducts/toggleIconOrder", product);
+    store.commit("cartProducts/removeItemFromCartProducts", product);
   }
 };
 
@@ -104,22 +97,11 @@ const cartProducts = computed(() => store.getters["cartProducts/cartProducts"]);
 watch(
   cartProducts,
   (newCartProducts) => {
-    if (newCartProducts.length === 0) {
-      products.value.forEach((product) => {
-        product.iconOrder = "order";
-      });
-    } else {
-      products.value.forEach((product) => {
-        const cartProduct = newCartProducts.find(
-          (item) => item.id === product.id
-        );
-        if (cartProduct) {
-          product.iconOrder = "not-order";
-        } else {
-          product.iconOrder = "order";
-        }
-      });
-    }
+    products.value.forEach((product) => {
+      product.iconOrder = newCartProducts.some((item) => item.id === product.id)
+        ? "not-order"
+        : "order";
+    });
   },
   { deep: true }
 );
@@ -132,14 +114,14 @@ watch(
 );
 
 const sortProducts = (newSortingOption) => {
-  if (newSortingOption === "title") {
-    return products.value.sort((a, b) => a.title.localeCompare(b.title));
-  }
-  if (newSortingOption === "price") {
-    return products.value.sort((a, b) => a.price - b.price);
-  }
-  return products.value.sort((a, b) => a.id - b.id);
+  if (newSortingOption === "title") return products.value.sort(sortTitle);
+  if (newSortingOption === "price") return products.value.sort(sortPrice);
+  return products.value.sort(sortId);
 };
+
+const sortTitle = (a, b) => a.title.localeCompare(b.title);
+const sortPrice = (a, b) => a.price - b.price;
+const sortId = (a, b) => a.id - b.id;
 
 watch(
   () => props.filter,
@@ -148,21 +130,20 @@ watch(
   }
 );
 
-const originalProducts = ref([]);
-
 const filterProducts = (newFilter) => {
-  if (!originalProducts.value.length) {
-    originalProducts.value = [...products.value];
-  }
+  if (!originalProducts.value.length) originalProducts.value = products.value;
+
+  if (!newFilter) products.value = originalProducts.value;
 
   if (newFilter) {
     products.value = originalProducts.value.filter((product) =>
-      product.title.toLowerCase().includes(newFilter.toLowerCase())
+      filterByTitle(product, newFilter)
     );
-  } else {
-    products.value = [...originalProducts.value];
   }
 };
+
+const filterByTitle = (product, newFilter) =>
+  product.title.toLowerCase().includes(newFilter.toLowerCase());
 </script>
 
 <style lang="sass" scoped>

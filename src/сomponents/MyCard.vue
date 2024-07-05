@@ -22,7 +22,7 @@
         <my-icon
           v-if="changeCarts !== null"
           :type="product.iconOrder"
-          @click="changeCarts(product.id)"
+          @click="changeCarts(product)"
         ></my-icon>
       </div>
       <my-typography tag="p" color="black" bold="bold">
