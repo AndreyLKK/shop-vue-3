@@ -28,7 +28,6 @@
       <my-typography tag="p" color="black" bold="bold">
         {{ product.price }}
       </my-typography>
-      {{ product.id }}
     </div>
   </li>
 </template>

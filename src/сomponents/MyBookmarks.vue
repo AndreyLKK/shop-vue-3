@@ -56,8 +56,4 @@ onMounted(() => {
   flex-wrap: wrap
   grid-gap: 40px
 
-
-// .bookmarks__item
-//   min-height: 100%
-//   height: max-content
 </style>
