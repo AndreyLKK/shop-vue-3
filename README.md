@@ -1,3 +1,7 @@
+---
+permalink: /index.html
+---
+
 # sneaker-store-vue-3
 
 ## Project setup
