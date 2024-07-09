@@ -6,7 +6,7 @@
     ></my-icon>
 
     <div class="cards__img">
-      <img :src="require(`@/assets/img${product.imageUrl}`)" alt="" />
+      <img :src="require(`@/assets/img${product.imageUrl}`)" alt="Изображение кроссовок" />
     </div>
     <my-typography color="black">{{ product.title }}</my-typography>
     <div class="cards__price">

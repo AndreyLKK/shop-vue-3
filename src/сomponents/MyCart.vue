@@ -10,33 +10,7 @@
           </my-typography>
         </div>
 
-        <ul class="cart__list">
-          <li
-            class="cart__item"
-            v-for="cartProduct in cartProducts"
-            :key="cartProduct.id"
-          >
-            <img
-              class="cart__img"
-              :src="require(`@/assets/img${cartProduct.imageUrl}`)"
-              alt=""
-            />
-            <div class="cart__item-info">
-              <my-typography tag="p" color="black">{{
-                cartProduct.title
-              }}</my-typography>
-              <my-typography tag="p" color="black" bold="bold"
-                >{{ cartProduct.price }} руб.</my-typography
-              >
-            </div>
-            <button class="cart__btn">
-              <my-icon
-                type="cross"
-                @click="removeCartProduct(cartProduct)"
-              ></my-icon>
-            </button>
-          </li>
-        </ul>
+        <my-cart-list :cartProducts="cartProducts"></my-cart-list>
 
         <div class="cart__footer" v-if="cartProducts.length">
           <div class="cart__footer-info">
@@ -139,9 +113,10 @@ import { defineComponent, computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
 import MyIcon from "@/UI/icon/MyIcon.vue";
+import MyCartList from "@/сomponents/MyCartList.vue";
 
 defineComponent({
-  components: { MyTypography, MyIcon },
+  components: { MyTypography, MyIcon, MyCartList },
   name: "MyCarts",
 });
 
@@ -154,11 +129,6 @@ const toggleCart = () => {
 };
 
 let cartProducts = computed(() => store.getters["cartProducts/cartProducts"]);
-
-function removeCartProduct(product) {
-  store.commit("cartProducts/toggleIconOrder", product);
-  store.commit("cartProducts/removeItemFromCartProducts", product);
-}
 
 const totalPrice = computed(() => store.getters["cartProducts/totalPrice"]);
 
@@ -186,6 +156,8 @@ function handleClickOutside(event) {
     toggleCart();
   }
 }
+
+
 
 const orderIsProcessed = ref(false);
 
@@ -283,27 +255,7 @@ function placingOrder() {
   left: 10%
   top: 50%
   transform:  translateY(-65%) rotate(180deg)
-
-.cart__item
-  border: 1px solid rgb(243, 243, 243)
-  border-radius: 20px
-  background: rgb(255, 255, 255)
-  display: flex
-  align-items: center
-  padding: 20px
-  margin-bottom: 20px
-
-.cart__img
-  width: 70px
-  height: 70px
-  margin-right: 21px
-
-.cart__item-info
-  display: block
-  margin-right: 12px
-
-.cart__btn
-  cursor: pointer
+  
 
 .cart__footer
   margin-top: auto

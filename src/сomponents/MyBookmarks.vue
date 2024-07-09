@@ -55,5 +55,4 @@ onMounted(() => {
   display: flex
   flex-wrap: wrap
   grid-gap: 40px
-
 </style>
