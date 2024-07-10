@@ -12,16 +12,9 @@ const mutations = {
   },
 };
 
-const actions = {
-  toggleCart({ commit }) {
-    commit("toggleCart");
-  },
-};
-
 export default {
   namespaced: true,
   state,
   getters,
   mutations,
-  actions,
 };

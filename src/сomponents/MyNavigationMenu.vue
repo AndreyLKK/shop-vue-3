@@ -67,9 +67,7 @@ const store = useStore();
 
 const hoveredIndex = ref(null);
 
-const toggleCart = () => {
-  store.dispatch("toggleCart/toggleCart");
-};
+const toggleCart = () => store.commit("toggleCart/toggleCart");
 
 const totalPrice = computed(() => store.getters["cartProducts/totalPrice"]);
 </script>

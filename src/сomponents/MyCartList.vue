@@ -8,7 +8,7 @@
       <img
         class="cart__img"
         :src="require(`@/assets/img${cartProduct.imageUrl}`)"
-        alt=""
+        alt="Кроссовки в корзине"
       />
       <div class="cart__item-info">
         <my-typography tag="p" color="black">{{
