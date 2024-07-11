@@ -153,5 +153,9 @@ function placingOrder() {
 
   .cart__window
     max-width: 100%
-    padding: 30px 80px  
+    padding: 30px 80px 
+
+@media (max-width: 490px)
+  .cart__window
+    padding: 30px 50px      
 </style>

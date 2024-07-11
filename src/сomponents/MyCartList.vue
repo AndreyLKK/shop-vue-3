@@ -11,7 +11,7 @@
         alt="Кроссовки в корзине"
       />
       <div class="sneakers-in-cart__item-info">
-        <my-typography tag="p" color="black">{{
+        <my-typography class="sneakers-in-cart__title" tag="p" color="black">{{
           cartProduct.title
         }}</my-typography>
         <my-typography tag="p" color="black" bold="bold"
@@ -66,16 +66,22 @@ function removeCartProduct(product) {
   display: block
   margin-right: 12px
 
+.sneakers-in-cart__title
+  margin-bottom: 10px  
+
 .sneakers-in-cart__btn
   cursor: pointer
 
-@media (max-width: 640px)
-.sneakers-in-cart__list
-
-
 .sneakers-in-cart__item
-  width: 400px
+  max-width: 400px
   margin: 0 auto 20px
   justify-content: space-between
 
+@media (max-width: 490px)
+  .sneakers-in-cart__img
+     margin-right: 10px
+
+  .sneakers-in-cart__item-info
+    margin-right: 6px
+   
 </style>
