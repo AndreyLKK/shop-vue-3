@@ -30,7 +30,7 @@ const isCartOpen = computed(() => store.getters["toggleCart/isCartOpen"]);
 
 .app
   background-color: rgb(124, 225 ,180)
-  height: 100%
+  height: 100vh
   padding: 85px 15px
 
 .hidden

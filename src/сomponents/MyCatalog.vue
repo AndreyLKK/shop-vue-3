@@ -59,6 +59,7 @@ const sortingOption = ref("standart");
 <style lang="sass" scoped>
 .catalog
   padding-top: 39px
+  min-height: calc(100vh - 301px)
 
 .catalog__inner
   display: flex
