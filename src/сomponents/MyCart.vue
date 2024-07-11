@@ -146,4 +146,12 @@ function placingOrder() {
 
 .cart__footer
   margin-top: auto
+
+@media (max-width: 640px)
+  .cart__backdrop
+    display: none
+
+  .cart__window
+    max-width: 100%
+    padding: 30px 80px  
 </style>

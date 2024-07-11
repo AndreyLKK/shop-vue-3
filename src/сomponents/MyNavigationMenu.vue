@@ -46,7 +46,7 @@
           :color="hoveredIndex === 2 ? '#454545' : '#9B9B9B'"
         ></my-icon>
 
-        <my-typography class="navigation-menu__text ">Профиль</my-typography>
+        <my-typography class="navigation-menu__text">Профиль</my-typography>
       </button>
     </li>
   </ul>

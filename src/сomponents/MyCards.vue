@@ -149,7 +149,33 @@ const filterByTitle = (product, newFilter) =>
 <style lang="sass" scoped>
 .cards
   padding: 36px 0
-  display: flex
-  flex-wrap: wrap
+  display: grid
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))
+  justify-items: center
   grid-gap: 40px
+
+@media (max-width: 1115px)
+  .cards
+    gap: 40px 12px
+
+@media (max-width: 982px) 
+  .cards
+    gap: 40px 10px   
+
+@media (max-width: 890px)
+  .cards   
+    justify-content: center
+
+@media (max-width: 830px)
+  .cards
+    padding: 18px 0
+    grid-gap: 30px 10px
+
+@media (max-width: 710px)  
+  .cards
+    grid-gap: 40px 10px
+
+@media (max-width: 499px)  
+  .cards
+    grid-gap: 20px 10px
 </style>

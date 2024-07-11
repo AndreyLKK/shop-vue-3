@@ -14,7 +14,7 @@
   margin: 0 auto
   padding: 0 60px
 
-@media (max-width: 768px)
+@media (max-width: 820px)
   .container
     padding: 0 30px
 

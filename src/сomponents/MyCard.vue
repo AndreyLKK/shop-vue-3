@@ -6,7 +6,10 @@
     ></my-icon>
 
     <div class="cards__img">
-      <img :src="require(`@/assets/img${product.imageUrl}`)" alt="Изображение кроссовок" />
+      <img
+        :src="require(`@/assets/img${product.imageUrl}`)"
+        alt="Изображение кроссовок"
+      />
     </div>
     <my-typography color="black">{{ product.title }}</my-typography>
     <div class="cards__price">
@@ -83,4 +86,11 @@ defineProps({
 .cards__icon
   grid-column: 2
   grid-row: 1 / 3
+
+@media (max-width: 1150px)
+  .cards__item
+    max-width: 200px
+    padding: 20px
+
+
 </style>

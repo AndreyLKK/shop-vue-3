@@ -6,8 +6,8 @@
     :vlaue='modelValue'
   >
     <option
-      :value="sortingOption.value"
       class="select__option"
+      :value="sortingOption.value"
       v-for="sortingOption in sortingOptions"
       :key="sortingOption.title"
     >
@@ -57,4 +57,6 @@ const selectionHandler = (value) => {
   border-radius: 5px
   color: rgb(157, 157, 157)
   font-size: 16px
+  width: 100%
+  cursor: pointer
 </style>

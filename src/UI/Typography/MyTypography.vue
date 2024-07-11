@@ -102,4 +102,5 @@ export default {
 
 .height_xxl
   line-height: 39px
+
 </style>

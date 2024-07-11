@@ -96,10 +96,6 @@ const toggleDropMenu = () => {
   .header__logo-link
     column-gap: 10px
 
-  .header__logo
-    width: 20px
-    height: 20px
-
   .header__logo-span,
   .header__logo-text
     font-size: 15px

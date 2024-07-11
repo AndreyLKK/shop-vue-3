@@ -68,4 +68,14 @@ function removeCartProduct(product) {
 
 .sneakers-in-cart__btn
   cursor: pointer
+
+@media (max-width: 640px)
+.sneakers-in-cart__list
+
+
+.sneakers-in-cart__item
+  width: 400px
+  margin: 0 auto 20px
+  justify-content: space-between
+
 </style>

@@ -56,6 +56,7 @@ defineProps({
   border: 1px solid rgb(243, 243, 243)
   border-radius: 10px
   padding: 15px 15px 15px 18px
+  width: 100%
 
   &::placeholder
     color: rgb(196, 196, 196)

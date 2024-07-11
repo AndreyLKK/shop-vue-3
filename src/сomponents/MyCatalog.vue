@@ -2,15 +2,22 @@
   <div class="catalog">
     <my-container>
       <div class="catalog__inner">
-        <my-typography tag="p" bold="bold" size="xl" height="xxl" color="black"
+        <my-typography
+          class="catalog__text"
+          tag="p"
+          bold="bold"
+          size="xl"
+          height="xxl"
+          color="black"
           >Все кроссовки</my-typography
         >
         <div class="catalog__actions">
           <div class="catalog__drop-list">
             <my-select v-model="sortingOption"></my-select>
           </div>
-          <div class="catalog__input">
+          <div class="catalog__inner-input">
             <my-input
+              class="catalog__input"
               placeholder="Поиск..."
               iconPosition="left"
               v-model="filter"
@@ -57,12 +64,39 @@ const sortingOption = ref("standart");
   display: flex
   align-items: center
   justify-content: space-between
+  grid-gap: 15px
 
 .catalog__actions
   display: flex
   grid-gap: 40px
 
-.catalog__input
+.catalog__inner-input
   max-width: 250px
   min-height: 45px
+
+
+@media (max-width: 920px)
+  .catalog__text
+    font-size: 30px
+
+  .catalog__actions
+    grid-gap: 20px
+
+@media (max-width: 830px)
+  .catalog
+    padding-top: 20px
+
+  .catalog__actions
+    flex-direction: column-reverse
+
+  .catalog__inner
+    justify-content: space-around
+
+  .catalog__text
+    min-width: 220px
+
+
+@media (max-width: 480px)
+  .catalog__inner
+    flex-direction: column
 </style>
