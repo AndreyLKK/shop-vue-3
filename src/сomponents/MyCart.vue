@@ -18,14 +18,20 @@
           </my-order-confirmation>
         </div>
 
-        <div v-if="!cartProducts.length && !orderIsProcessed">
+        <div
+          v-if="!cartProducts.length && !orderIsProcessed"
+          class="cart__status"
+        >
           <my-cart-status
             cartStatus="empty"
             @returnToCart="toggleCart"
           ></my-cart-status>
         </div>
 
-        <div v-if="!cartProducts.length && orderIsProcessed">
+        <div
+          v-if="!cartProducts.length && orderIsProcessed"
+          class="cart__status"
+        >
           <my-cart-status
             cartStatus="issued"
             @returnToCart="toggleCart"

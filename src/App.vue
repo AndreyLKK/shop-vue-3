@@ -24,13 +24,12 @@ defineComponent({
 const store = useStore();
 
 const isCartOpen = computed(() => store.getters["toggleCart/isCartOpen"]);
-
 </script>
 
 <style lang="sass" scoped>
 
 .app
-  background-color: rgb(231, 246, 255)
+  background-color: rgb(124, 225 ,180)
   height: 100%
   padding: 85px 15px
 

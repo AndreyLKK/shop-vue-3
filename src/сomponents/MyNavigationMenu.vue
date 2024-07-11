@@ -46,7 +46,7 @@
           :color="hoveredIndex === 2 ? '#454545' : '#9B9B9B'"
         ></my-icon>
 
-        <my-typography class="navigation-menu__text">Профиль</my-typography>
+        <my-typography class="navigation-menu__text ">Профиль</my-typography>
       </button>
     </li>
   </ul>
@@ -76,7 +76,7 @@ const totalPrice = computed(() => store.getters["cartProducts/totalPrice"]);
 
 .navigation-menu__list
   display: flex
-  align-items: flex-end
+  align-items: flex-start
   grid-gap: 32px
 
 .navigation-menu__item
@@ -96,4 +96,13 @@ const totalPrice = computed(() => store.getters["cartProducts/totalPrice"]);
 .navigation-menu__link
   display: flex
   grid-gap: 8px
+
+.color
+  color: #000
+
+
+@media (max-width: 768px)
+ .navigation-menu__list
+  grid-gap: 14px
+  display: none
 </style>

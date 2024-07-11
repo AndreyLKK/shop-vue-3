@@ -1,12 +1,12 @@
 <template>
-  <div class="cart__status">
+  <div class="status">
     <img
-      class="cart__status-img"
+      class="status__img"
       :src="require(`@/assets/img/${status.imgUrl}.png`)"
       alt="Статус корзины"
     />
     <my-typography
-      class="cart__status-title"
+      class="status__title"
       tag="p"
       bold="bold"
       color="black"
@@ -15,18 +15,14 @@
     >
       {{ status.title }}
     </my-typography>
-    <my-typography class="cart__status-text" tag="p" size="s" height="l">
+    <my-typography class="status__text" tag="p" size="s" height="l">
       {{ status.description }}
     </my-typography>
-    <button
-      class="cart__status-btn"
-      type="button"
-      @click="$emit('returnToCart')"
-    >
+    <button class="status__btn" type="button" @click="$emit('returnToCart')">
       <my-typography tag="span" color="white" bold="bold" height="m">
         Вернуться назад
       </my-typography>
-      <div class="cart__status-icon">
+      <div class="status__icon">
         <my-icon type="design-arrow"></my-icon>
       </div>
     </button>
@@ -63,18 +59,18 @@ const status = cartStatuses.find((status) => {
 </script>
 
 <style lang="sass" scoped>
-.cart__status-img
+.status__img
   height: 100%
   max-height: 120px
-  margin-bottom: 21px
+  margin: 0 auto 21px
 
-.cart__status-title
+.status__title
   margin-bottom: 9px
 
-.cart__status-text
+.status__text
   margin-bottom: 40px
 
-.cart__status-btn
+.status__btn
   border-radius: 18px
   background: rgb(157, 213, 88)
   padding: 18px 43px 18px 30px
@@ -83,7 +79,7 @@ const status = cartStatuses.find((status) => {
   position: relative
   text-align: right
 
-.cart__status-icon
+.status__icon
   position: absolute
   left: 10%
   top: 50%

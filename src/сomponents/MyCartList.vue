@@ -1,16 +1,16 @@
 <template>
-  <ul class="cart__list">
+  <ul class="sneakers-in-cart__list">
     <li
-      class="cart__item"
+      class="sneakers-in-cart__item"
       v-for="cartProduct in cartProducts"
       :key="cartProduct.id"
     >
       <img
-        class="cart__img"
+        class="sneakers-in-cart__img"
         :src="require(`@/assets/img${cartProduct.imageUrl}`)"
         alt="Кроссовки в корзине"
       />
-      <div class="cart__item-info">
+      <div class="sneakers-in-cart__item-info">
         <my-typography tag="p" color="black">{{
           cartProduct.title
         }}</my-typography>
@@ -18,7 +18,7 @@
           >{{ cartProduct.price }} руб.</my-typography
         >
       </div>
-      <button class="cart__btn">
+      <button class="sneakers-in-cart__btn">
         <my-icon type="cross" @click="removeCartProduct(cartProduct)"></my-icon>
       </button>
     </li>
@@ -48,7 +48,7 @@ function removeCartProduct(product) {
 </script>
 
 <style lang="sass" scoped>
-.cart__item
+.sneakers-in-cart__item
   border: 1px solid rgb(243, 243, 243)
   border-radius: 20px
   background: rgb(255, 255, 255)
@@ -57,15 +57,15 @@ function removeCartProduct(product) {
   padding: 20px
   margin-bottom: 20px
 
-.cart__img
+.sneakers-in-cart__img
   width: 70px
   height: 70px
   margin-right: 21px
 
-.cart__item-info
+.sneakers-in-cart__item-info
   display: block
   margin-right: 12px
 
-.cart__btn
+.sneakers-in-cart__btn
   cursor: pointer
 </style>
