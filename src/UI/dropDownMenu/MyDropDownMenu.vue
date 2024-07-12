@@ -70,4 +70,5 @@ const toggleDropMenu = () => {
 .drop-down-menu__icon
   transform: rotate(180deg)
   display: flex
+ 
 </style>
