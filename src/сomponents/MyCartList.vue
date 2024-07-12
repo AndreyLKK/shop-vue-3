@@ -25,7 +25,7 @@
   </ul>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 
@@ -37,11 +37,22 @@ defineComponent({
   name: "MyCartList",
 });
 
-let cartProducts = computed(() => store.getters["cartProducts/cartProducts"]);
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  imageUrl: string;
+  iconFavorite: string;
+  iconOrder: string;
+}
+
+let cartProducts = computed(
+  (): Product[] => store.getters["cartProducts/cartProducts"]
+);
 
 const store = useStore();
 
-function removeCartProduct(product) {
+function removeCartProduct(product: Product) {
   store.commit("cartProducts/toggleIconOrder", product);
   store.commit("cartProducts/removeItemFromCartProducts", product);
 }
@@ -67,7 +78,7 @@ function removeCartProduct(product) {
   margin-right: 12px
 
 .sneakers-in-cart__title
-  margin-bottom: 10px  
+  margin-bottom: 10px
 
 .sneakers-in-cart__btn
   cursor: pointer
@@ -83,5 +94,4 @@ function removeCartProduct(product) {
 
   .sneakers-in-cart__item-info
     margin-right: 6px
-   
 </style>

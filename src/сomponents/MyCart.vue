@@ -42,7 +42,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, ref, onMounted } from "vue";
 import { useStore } from "vuex";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
@@ -51,6 +51,15 @@ import MyCartList from "@/сomponents/MyCartList.vue";
 import MyCartPrice from "@/сomponents/MyCartPrice.vue";
 import MyOrderConfirmation from "@/сomponents/MyOrderConfirmation.vue";
 import MyCartStatus from "@/сomponents/MyCartStatus.vue";
+
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  imageUrl: string;
+  iconFavorite: string;
+  iconOrder: string;
+}
 
 const store = useStore();
 
@@ -69,23 +78,22 @@ onMounted(() => {
   const localStoragePurchaseData =
     JSON.parse(localStorage.getItem("purchase")) || [];
 
-  localStoragePurchaseData.forEach((element) => {
-    cartProducts.value.push(element);
-  });
+  localStoragePurchaseData.forEach((element: Product) =>
+    cartProducts.value.push(element)
+  );
 });
 
-function handleClickOutside(event) {
+function handleClickOutside(event: any) {
   if (backdrop.value && backdrop.value.contains(event.target)) {
     toggleCart();
   }
 }
 
-const orderIsProcessed = ref(false);
+const orderIsProcessed = ref<boolean>(false);
 
 function placingOrder() {
   emptyingTheTrash();
   orderIsProcessed.value = true;
-
   alert("Заказ офромлен");
 }
 </script>
@@ -153,9 +161,9 @@ function placingOrder() {
 
   .cart__window
     max-width: 100%
-    padding: 30px 80px 
+    padding: 30px 80px
 
 @media (max-width: 490px)
   .cart__window
-    padding: 30px 50px      
+    padding: 30px 50px
 </style>

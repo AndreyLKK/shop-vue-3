@@ -35,7 +35,7 @@
   </header>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineComponent, ref } from "vue";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
 import MyIcon from "@/UI/icon/MyIcon.vue";
@@ -56,9 +56,9 @@ defineComponent({
   name: "MyHeader",
 });
 
-let dropMenu = ref(false);
+let dropMenu = ref<boolean>(false);
 
-const toggleDropMenu = () => {
+const toggleDropMenu = (): void => {
   dropMenu.value = !dropMenu.value;
 };
 </script>

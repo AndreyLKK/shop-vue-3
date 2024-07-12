@@ -36,24 +36,24 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineComponent, ref } from "vue";
 
 import MyContainer from "@/UI/container/MyContainer.vue";
 import MyInput from "@/UI/input/MyInput.vue";
 import MyIcon from "@/UI/icon/MyIcon.vue";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
-import MyCards from "@/сomponents/MyCards.vue";
 import MySelect from "@/UI/select/MySelect.vue";
+import MyCards from "@/сomponents/MyCards.vue";
 
 defineComponent({
   сomponents: { MyContainer, MyInput, MyIcon, MyTypography, MyCards, MySelect },
   name: "MyCatalog",
 });
 
-const filter = ref("");
+const filter = ref<string>("");
 
-const sortingOption = ref("standart");
+const sortingOption = ref<string>("standart");
 </script>
 
 <style lang="sass" scoped>

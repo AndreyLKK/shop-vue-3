@@ -29,7 +29,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps } from "vue";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
 import MyIcon from "@/UI/icon/MyIcon.vue";
@@ -38,7 +38,14 @@ const props = defineProps({
   cartStatus: String,
 });
 
-const cartStatuses = [
+interface Status {
+  imgUrl: string;
+  title: string;
+  description: string;
+  cartStatus: string;
+}
+
+const cartStatuses: Status[] = [
   {
     imgUrl: "order-processed",
     title: "Заказ оформлен!",
@@ -53,7 +60,7 @@ const cartStatuses = [
   },
 ];
 
-const status = cartStatuses.find((status) => {
+const status = cartStatuses.find((status: Status) => {
   return status.cartStatus === props.cartStatus;
 });
 </script>

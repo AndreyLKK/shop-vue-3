@@ -52,7 +52,7 @@
   </ul>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineComponent, computed, ref } from "vue";
 import { useStore } from "vuex";
 import MyIcon from "@/UI/icon/MyIcon.vue";
@@ -65,11 +65,13 @@ defineComponent({
 
 const store = useStore();
 
-const hoveredIndex = ref(null);
+const hoveredIndex = ref<number>(null);
 
-const toggleCart = () => store.commit("toggleCart/toggleCart");
+const toggleCart = (): void => store.commit("toggleCart/toggleCart");
 
-const totalPrice = computed(() => store.getters["cartProducts/totalPrice"]);
+const totalPrice = computed(
+  (): number => store.getters["cartProducts/totalPrice"]
+);
 </script>
 
 <style lang="sass" scoped>

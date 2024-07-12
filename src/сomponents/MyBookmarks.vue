@@ -24,17 +24,26 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineComponent, computed, onMounted } from "vue";
 import { useStore } from "vuex";
 import MyCard from "@/сomponents/MyCard.vue";
 import MyContainer from "@/UI/container/MyContainer.vue";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
 
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  imageUrl: string;
+  iconFavorite: string;
+  iconOrder: string;
+}
+
 const store = useStore();
 
 const bookmarksProducts = computed(
-  () => store.getters["bookmarksProducts/bookmarksProducts"]
+  (): void => store.getters["bookmarksProducts/bookmarksProducts"]
 );
 
 defineComponent({
@@ -42,11 +51,11 @@ defineComponent({
   name: "MyBookmarks",
 });
 
-const changeFavorite = (productId) => {
-  store.commit("bookmarksProducts/removeItemFromBookmarksProduts", productId);
+const changeFavorite = (product: Product): void => {
+  store.commit("bookmarksProducts/removeItemFromBookmarksProduts", product);
 };
 
-onMounted(() => {
+onMounted((): void => {
   store.dispatch("bookmarksProducts/initializeBookmarksProducts");
 });
 </script>
@@ -57,7 +66,7 @@ onMounted(() => {
   min-height: calc(100vh - 301px)
 
 .bookmarks__title
-  padding-top: 39px  
+  padding-top: 39px
 
 .bookmarks__list
   padding: 36px 0
@@ -70,12 +79,12 @@ onMounted(() => {
   .bookmarks__list
     gap: 40px 12px
 
-@media (max-width: 982px) 
+@media (max-width: 982px)
   .bookmarks__list
-    gap: 40px 10px   
+    gap: 40px 10px
 
 @media (max-width: 890px)
-  .bookmarks__list   
+  .bookmarks__list
     justify-content: center
 
 @media (max-width: 830px)
@@ -83,19 +92,16 @@ onMounted(() => {
     padding: 18px 0
     grid-gap: 30px 10px
 
-@media (max-width: 709px)  
+@media (max-width: 709px)
   .bookmarks__list
     grid-gap: 40px 10px
-  
+
   .bookmarks__title
     font-size: 30px
     text-align: center
-    padding-top: 16px   
+    padding-top: 16px
 
-@media (max-width: 499px)  
+@media (max-width: 499px)
   .bookmarks__list
     grid-gap: 20px 10px
-
-
-
 </style>

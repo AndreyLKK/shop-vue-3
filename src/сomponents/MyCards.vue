@@ -10,7 +10,7 @@
   </ul>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {
   defineComponent,
   ref,
@@ -22,6 +22,15 @@ import {
 import { useStore } from "vuex";
 import MyCard from "@/сomponents/MyCard.vue";
 import { fetchData } from "@/api/productCards.js";
+
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  imageUrl: string;
+  iconFavorite: string;
+  iconOrder: string;
+}
 
 defineComponent({
   сomponents: { MyCard },
@@ -36,10 +45,10 @@ const props = defineProps({
 
 const store = useStore();
 
-let products = ref([]);
-const originalProducts = ref([]);
+let products = ref<Product[]>([]);
+const originalProducts = ref<Product[]>([]);
 
-onMounted(() => {
+onMounted((): void => {
   waitingData();
 });
 
@@ -57,11 +66,14 @@ async function fethcProducts() {
   return await fetchData();
 }
 
-const getLocalStorageData = (key) => {
+const getLocalStorageData = (key: string): Product[] => {
   return JSON.parse(localStorage.getItem(key)) || [];
 };
 
-const initializeProductStatuses = (orderStatus, favoriteStatus) => {
+const initializeProductStatuses = (
+  orderStatus: Product[],
+  favoriteStatus: Product[]
+) => {
   return products.value.map((product) => {
     product.iconOrder = orderStatus.find((item) => item.id === product.id)
       ? "not-order"
@@ -72,7 +84,7 @@ const initializeProductStatuses = (orderStatus, favoriteStatus) => {
   });
 };
 
-const changeFavorite = (product) => {
+const changeFavorite = (product: Product) => {
   if (product.iconFavorite === "favorite") {
     store.commit("bookmarksProducts/toggleIconFavorite", product);
     store.commit("bookmarksProducts/addItemToBookmarksProduts", product);
@@ -82,7 +94,7 @@ const changeFavorite = (product) => {
   }
 };
 
-const changeCarts = (product) => {
+const changeCarts = (product: Product) => {
   if (product.iconOrder === "order") {
     store.commit("cartProducts/toggleIconOrder", product);
     store.commit("cartProducts/addItemToCartProduts", product);
@@ -98,7 +110,9 @@ watch(
   cartProducts,
   (newCartProducts) => {
     products.value.forEach((product) => {
-      product.iconOrder = newCartProducts.some((item) => item.id === product.id)
+      product.iconOrder = newCartProducts.some(
+        (item: Product) => item.id === product.id
+      )
         ? "not-order"
         : "order";
     });
@@ -113,15 +127,15 @@ watch(
   }
 );
 
-const sortProducts = (newSortingOption) => {
+const sortProducts = (newSortingOption: string) => {
   if (newSortingOption === "title") return products.value.sort(sortTitle);
   if (newSortingOption === "price") return products.value.sort(sortPrice);
   return products.value.sort(sortId);
 };
 
-const sortTitle = (a, b) => a.title.localeCompare(b.title);
-const sortPrice = (a, b) => a.price - b.price;
-const sortId = (a, b) => a.id - b.id;
+const sortTitle = (a: Product, b: Product) => a.title.localeCompare(b.title);
+const sortPrice = (a: Product, b: Product) => a.price - b.price;
+const sortId = (a: Product, b: Product) => a.id - b.id;
 
 watch(
   () => props.filter,
@@ -130,7 +144,7 @@ watch(
   }
 );
 
-const filterProducts = (newFilter) => {
+const filterProducts = (newFilter: string) => {
   if (!originalProducts.value.length) originalProducts.value = products.value;
 
   if (!newFilter) products.value = originalProducts.value;
@@ -142,7 +156,7 @@ const filterProducts = (newFilter) => {
   }
 };
 
-const filterByTitle = (product, newFilter) =>
+const filterByTitle = (product: Product, newFilter: string) =>
   product.title.toLowerCase().includes(newFilter.toLowerCase());
 </script>
 
@@ -158,12 +172,12 @@ const filterByTitle = (product, newFilter) =>
   .cards
     gap: 40px 12px
 
-@media (max-width: 982px) 
+@media (max-width: 982px)
   .cards
-    gap: 40px 10px   
+    gap: 40px 10px
 
 @media (max-width: 890px)
-  .cards   
+  .cards
     justify-content: center
 
 @media (max-width: 830px)
@@ -171,11 +185,11 @@ const filterByTitle = (product, newFilter) =>
     padding: 18px 0
     grid-gap: 30px 10px
 
-@media (max-width: 710px)  
+@media (max-width: 710px)
   .cards
     grid-gap: 40px 10px
 
-@media (max-width: 499px)  
+@media (max-width: 499px)
   .cards
     grid-gap: 20px 10px
 </style>

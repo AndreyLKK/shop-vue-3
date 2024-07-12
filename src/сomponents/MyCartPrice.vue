@@ -19,7 +19,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 
@@ -31,9 +31,11 @@ defineComponent({
 
 const store = useStore();
 
-const totalPrice = computed(() => store.getters["cartProducts/totalPrice"]);
+const totalPrice = computed<number>(
+  () => store.getters["cartProducts/totalPrice"]
+);
 
-const taxAmount = computed(() => {
+const taxAmount = computed<number>(() => {
   let taxRate = 0.05;
   taxRate *= totalPrice.value;
   return Math.ceil(taxRate);

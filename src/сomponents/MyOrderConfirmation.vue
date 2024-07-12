@@ -9,7 +9,7 @@
   </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineComponent, defineEmits } from "vue";
 import MyIcon from "@/UI/icon/MyIcon.vue";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
