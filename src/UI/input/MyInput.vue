@@ -55,11 +55,18 @@ defineProps({
 .input
   border: 1px solid rgb(243, 243, 243)
   border-radius: 10px
+  background-color: #f6f6f6
   padding: 15px 15px 15px 18px
   width: 100%
-
+  transition: background-color 0.3s
   &::placeholder
     color: rgb(196, 196, 196)
+  &:hover
+    background-color: #f6f6f629
+  &:focus
+    outline: 2px solid rgb(124, 225, 180)
+  &:active
+    background-color: #f5fffa
 
 .iconPosition_left
    padding: 15px 15px 15px 46px

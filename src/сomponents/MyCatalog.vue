@@ -4,7 +4,7 @@
       <div class="catalog__inner">
         <my-typography
           class="catalog__text"
-          tag="p"
+          tag="h2"
           bold="bold"
           size="xl"
           height="xxl"
@@ -13,7 +13,11 @@
         >
         <div class="catalog__actions">
           <div class="catalog__drop-list">
-            <my-select v-model="sortingOption"></my-select>
+            <my-select
+              class="catalog__select"
+              v-model="sortingOption"
+              tabindex="0"
+            ></my-select>
           </div>
           <div class="catalog__inner-input">
             <my-input
@@ -54,6 +58,7 @@ defineComponent({
 const filter = ref<string>("");
 
 const sortingOption = ref<string>("standart");
+
 </script>
 
 <style lang="sass" scoped>
@@ -74,7 +79,6 @@ const sortingOption = ref<string>("standart");
 .catalog__inner-input
   max-width: 250px
   min-height: 45px
-
 
 @media (max-width: 920px)
   .catalog__text

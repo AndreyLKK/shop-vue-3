@@ -33,6 +33,8 @@ const placingOrder = () => {
   padding: 18px 18px
   width: 100%
   position: relative
+  &:focus
+    outline: 2px solid rgb(124, 225, 180)
 
 .footer-confirmation__icon
   position: absolute

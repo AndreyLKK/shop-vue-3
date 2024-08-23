@@ -40,7 +40,7 @@
 
     <svg
       v-if="type === 'cart'"
-      class="cart_s"
+      class="cart__icon"
       width="20.000000"
       height="20.000000"
       viewBox="0 0 20 20"
@@ -79,7 +79,7 @@
 
     <svg
       v-if="type === 'bookmarks'"
-      class="cart_s"
+      class="bookmarks__icon"
       width="19.000000"
       height="17.000000"
       viewBox="0 0 19 17"
@@ -506,6 +506,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.cart_s path
+.cart__icon path,
+.cart__icon-bookmarks path
   transition: stroke 0.3s ease
 </style>

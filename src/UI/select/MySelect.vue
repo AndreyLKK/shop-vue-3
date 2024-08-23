@@ -1,9 +1,9 @@
 <template>
   <select
+  class="select"
     name="select-product"
-    class="select"
     @change="selectionHandler($event.target.value)"
-    :vlaue='modelValue'
+    :vlaue="modelValue"
   >
     <option
       class="select__option"
@@ -29,7 +29,7 @@ defineProps({
 
 const sortingOptions = [
   {
-    title: "Не выбрано",
+    title: "Сортировка",
     value: "standart",
   },
   {
@@ -46,7 +46,6 @@ const emit = defineEmits(["update:modelValue"]);
 
 const selectionHandler = (value) => {
   emit("update:modelValue", value);
-
 };
 </script>
 
@@ -54,9 +53,17 @@ const selectionHandler = (value) => {
 .select
   padding: 15px 40px 15px 5px
   border: 1px solid rgb(243, 243, 243)
+  background-color: #f6f6f6
   border-radius: 5px
   color: rgb(157, 157, 157)
   font-size: 16px
   width: 100%
   cursor: pointer
+  transition: outline 0.3s, background-color 0.3s
+  &:focus
+    outline: 2px solid rgb(124, 225, 180)
+  &:hover
+    background-color: #f6f6f629
+  &:active
+    background-color: #f5fffa
 </style>

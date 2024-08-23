@@ -6,13 +6,15 @@
         @click="toggleCart"
         @mouseover="hoveredIndex = 0"
         @mouseleave="hoveredIndex = null"
+        tabindex="0"
+        ref="previouslyFocusedElement"
       >
         <my-icon
           class="navigation-menu__icon"
           type="cart"
           :color="hoveredIndex === 0 ? '#454545' : '#9B9B9B'"
         ></my-icon>
-
+        <span class="visually-hidden">Корзина добавленных товаров</span>
         <my-typography class="navigation-menu__text"
           >{{ totalPrice }} руб.</my-typography
         >
@@ -25,8 +27,10 @@
         to="/bookmarks"
         @mouseover="hoveredIndex = 1"
         @mouseleave="hoveredIndex = null"
+        tabindex="0"
       >
         <my-icon
+          class="navigation-menu__icon"
           type="bookmarks"
           :color="hoveredIndex === 1 ? '#454545' : '#9B9B9B'"
         ></my-icon>
@@ -40,8 +44,10 @@
         class="navigation-menu__btn"
         @mouseover="hoveredIndex = 2"
         @mouseleave="hoveredIndex = null"
+        tabindex="0"
       >
         <my-icon
+          class="navigation-menu__icon"
           type="profile"
           :color="hoveredIndex === 2 ? '#454545' : '#9B9B9B'"
         ></my-icon>
@@ -53,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent, computed, ref } from "vue";
+import { defineComponent, computed, ref, watch } from "vue";
 import { useStore } from "vuex";
 import MyIcon from "@/UI/icon/MyIcon.vue";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
@@ -65,9 +71,21 @@ defineComponent({
 
 const store = useStore();
 
-const hoveredIndex = ref<number>(null);
+const hoveredIndex = ref<number | null>(null);
 
-const toggleCart = (): void => store.commit("toggleCart/toggleCart");
+const toggleCart = (): void => {
+  store.commit("toggleCart/toggleCart");
+};
+
+const isCartOpen = computed(() => store.getters["toggleCart/isCartOpen"]);
+
+const previouslyFocusedElement = ref<HTMLElement | null>(null);
+
+watch(isCartOpen, (newValue) => {
+  if (!newValue) {
+    previouslyFocusedElement.value?.focus();
+  }
+});
 
 const totalPrice = computed(
   (): number => store.getters["cartProducts/totalPrice"]
@@ -86,22 +104,23 @@ const totalPrice = computed(
 
 .navigation-menu__btn,
 .navigation-menu__link
-  transition: text-shadow 0.1s, color 0.1s
-  display: inline-block
-
+  transition: outline 0.1s, text-shadow 0.1s, color 0.1s
+  display: flex
+  grid-gap: 8px
+  align-items: center
   &:hover
     text-shadow: .4px 0px 0px #818181, -.4px 0px 0px #818181
     color: rgb(92, 92, 92)
+  &:focus
+    outline: 2px solid rgb(124, 225, 180)
+    border-radius: 4px
+  &:focus
+    outline: 2px solid rgb(124, 225, 180)
+    border-radius: 4px
 
-
-.navigation-menu__btn,
-.navigation-menu__link
-  display: flex
-  grid-gap: 8px
-
-.color
-  color: #000
-
+.navigation-menu__icon
+  display: flex  
+  align-items: center
 
 @media (max-width: 768px)
  .navigation-menu__list

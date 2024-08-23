@@ -3,17 +3,21 @@
     <my-container>
       <div class="header__wrapper">
         <div class="header__inner">
-          <router-link class="header__logo-link" to="/">
+          <router-link class="header__logo-link" to="/" tabindex="0">
             <div class="header__logo">
-              <my-icon type="logo"></my-icon>
+              <img
+                class="header__logo-img"
+                src="@/assets/logo.png"
+                alt="Логотип магазина кроссовок"
+              />
             </div>
             <my-typography
               class="header__logo-text"
               tag="h1"
               bold="bold"
-              size="s"
+              size="l"
               color="black"
-              >VUE SNEAKERS</my-typography
+              >Sneaker Haven</my-typography
             >
             <my-typography class="header__logo-span" tag="span"
               >Магазин лучших кроссовок</my-typography
@@ -28,7 +32,6 @@
         <my-drop-down-menu
           v-if="dropMenu"
           @eventToggleDropMenu="toggleDropMenu"
-          @eventCloseMenu="closeMenu"
         ></my-drop-down-menu>
       </div>
     </my-container>
@@ -38,7 +41,6 @@
 <script setup lang="ts">
 import { defineComponent, ref } from "vue";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
-import MyIcon from "@/UI/icon/MyIcon.vue";
 import MyContainer from "@/UI/container/MyContainer.vue";
 import MyBurgerButton from "@/UI/burgerButton/MyBurgerButton.vue";
 import MyDropDownMenu from "@/UI/dropDownMenu/MyDropDownMenu.vue";
@@ -48,7 +50,6 @@ defineComponent({
   components: {
     MyTypography,
     MyNavigationMenu,
-    MyIcon,
     MyContainer,
     MyBurgerButton,
     MyDropDownMenu,
@@ -80,11 +81,21 @@ const toggleDropMenu = (): void => {
   display: grid
   grid-template-columns: auto auto
   grid-template-rows: auto auto
+  align-items: center
+  transition: outline 0.1s ease
+
+.header__logo-link:focus
+  outline: 2px solid rgb(124, 225, 180)  
+  border-radius: 4px
 
 .header__logo
   margin-right: 16px
   grid-column: 1
   grid-row: span 2
+
+.header__logo-img
+  width: 100px
+  height: 70px
 
 @media (max-width: 768px)
   .header__wrapper

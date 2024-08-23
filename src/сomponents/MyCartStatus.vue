@@ -2,7 +2,7 @@
   <div class="status">
     <img
       class="status__img"
-      :src="require(`@/assets/img/${status.imgUrl}.png`)"
+      :src="require(`@/assets/img/${status?.imgUrl}.png`)"
       alt="Статус корзины"
     />
     <my-typography
@@ -13,10 +13,10 @@
       size="m"
       height="l"
     >
-      {{ status.title }}
+      {{ status?.title }}
     </my-typography>
     <my-typography class="status__text" tag="p" size="s" height="l">
-      {{ status.description }}
+      {{ status?.description }}
     </my-typography>
     <button class="status__btn" type="button" @click="$emit('returnToCart')">
       <my-typography tag="span" color="white" bold="bold" height="m">
@@ -85,6 +85,8 @@ const status = cartStatuses.find((status: Status) => {
   width: 100%
   position: relative
   text-align: right
+  &:focus
+    outline: 2px solid rgb(124, 225, 180)
 
 .status__icon
   position: absolute

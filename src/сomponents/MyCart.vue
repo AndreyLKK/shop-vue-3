@@ -1,15 +1,25 @@
 <template>
   <div class="cart" v-show="isCartOpen">
     <div class="cart__backdrop" ref="backdrop"></div>
-    <transition name="cart__windows">
+    <transition name="cart__windows" ref="modalContent">
       <div class="cart__window" @click.stop>
         <div class="cart__title">
-          <my-icon type="back-cart-arrow" @click="toggleCart"></my-icon>
+          <button
+            class="cart__btn"
+            ref="arrow"
+            tabindex="0"
+            @click="toggleCart"
+            @keydown.enter="toggleCart"
+            @keydown.space.prevent="toggleCart"
+          >
+            <my-icon class="cart__icon" type="back-cart-arrow"></my-icon>
+            <span class="visually-hidden">Закрыть окно корзины, вернуться назад</span>
+          </button>
+
           <my-typography tag="p" size="l" height="l" bold="bold" color="black">
             Корзина
           </my-typography>
         </div>
-
         <my-cart-list :cartProducts="cartProducts"></my-cart-list>
 
         <div class="cart__footer" v-if="cartProducts.length">
@@ -43,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from "vue";
+import { computed, ref, onMounted, watch, nextTick } from "vue";
 import { useStore } from "vuex";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
 import MyIcon from "@/UI/icon/MyIcon.vue";
@@ -71,12 +81,25 @@ const cartProducts = computed(() => store.getters["cartProducts/cartProducts"]);
 
 const emptyingTheTrash = () => store.commit("cartProducts/emptyingTheTrash");
 
-const backdrop = ref(null);
+const backdrop = ref<HTMLElement | null>(null);
+
+const arrow = ref<HTMLElement | null>(null);
+
+watch(isCartOpen, async (open) => {
+  if (open) {
+    await nextTick();
+    arrow.value?.focus();
+    trapFocus();
+  }
+});
 
 onMounted(() => {
   document.addEventListener("click", handleClickOutside);
-  const localStoragePurchaseData =
-    JSON.parse(localStorage.getItem("purchase")) || [];
+
+  const purchaseDataString = localStorage.getItem("purchase");
+  const localStoragePurchaseData = purchaseDataString
+    ? JSON.parse(purchaseDataString)
+    : [];
 
   localStoragePurchaseData.forEach((element: Product) =>
     cartProducts.value.push(element)
@@ -89,7 +112,42 @@ function handleClickOutside(event: any) {
   }
 }
 
-const orderIsProcessed = ref<boolean>(false);
+const orderIsProcessed = ref<boolean | null>(false);
+
+watch(orderIsProcessed, async (statusCart) => {
+  if (statusCart) {
+    await nextTick();
+    arrow.value?.focus();
+    trapFocus();
+  }
+});
+
+const modalContent = ref<HTMLElement | null>(null);
+
+const trapFocus = () => {
+  if (modalContent.value) {
+    const focusableElements = modalContent.value.querySelectorAll(
+      'button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+
+    if (focusableElements.length > 0) {
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      const handleTab = (event: KeyboardEvent) => {
+        console.log(event);
+
+        if (event.key === "Tab") {
+          if (document.activeElement === lastElement) {
+            event.preventDefault();
+            firstElement.focus();
+          }
+        }
+      };
+      document.addEventListener("keydown", handleTab);
+    }
+  }
+};
 
 function placingOrder() {
   emptyingTheTrash();
@@ -109,12 +167,12 @@ function placingOrder() {
 
 .cart__title
   display: flex
-  align-items: flex-start
+  align-items: center
 
 .cart__title .icon
-  margin-right: 30px
   cursor: pointer
   transform: rotate(180deg)
+  display: flex
 
 .cart__window
   padding: 30px
@@ -130,6 +188,12 @@ function placingOrder() {
   flex-direction: column
   grid-gap: 30px
   overflow-y: auto
+
+.cart__btn
+  margin-right: 20px
+  &:focus
+    outline: 2px solid rgb(124, 225, 180)
+    border-radius: 4px
 
 .cart__windows-enter-active,
 .cart__windows-leave-active

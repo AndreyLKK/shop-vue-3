@@ -1,11 +1,13 @@
 <template>
   <ul class="cards">
     <my-card
+      class="cards__item"
       v-for="product in products"
       :key="product.id"
       :product="product"
       :changeFavorite="changeFavorite"
       :changeCarts="changeCarts"
+      tabindex="0"
     ></my-card>
   </ul>
 </template>
@@ -54,8 +56,8 @@ onMounted((): void => {
 
 async function waitingData() {
   products.value = await fethcProducts();
-  const orderStatus = getLocalStorageData("purchase");
-  const favoriteStatus = getLocalStorageData("bookmarks");
+  const orderStatus = getAllLocalStorageData("purchase");
+  const favoriteStatus = getAllLocalStorageData("bookmarks");
 
   store.dispatch("bookmarksProducts/initializeBookmarksProducts");
 
@@ -66,8 +68,9 @@ async function fethcProducts() {
   return await fetchData();
 }
 
-const getLocalStorageData = (key: string): Product[] => {
-  return JSON.parse(localStorage.getItem(key)) || [];
+const getAllLocalStorageData = (key: string): Product[] => {
+  const getDataByString = localStorage.getItem(key);
+  return getDataByString ? JSON.parse(getDataByString) : [];
 };
 
 const initializeProductStatuses = (
@@ -127,7 +130,7 @@ watch(
   }
 );
 
-const sortProducts = (newSortingOption: string) => {
+const sortProducts = (newSortingOption: string | undefined) => {
   if (newSortingOption === "title") return products.value.sort(sortTitle);
   if (newSortingOption === "price") return products.value.sort(sortPrice);
   return products.value.sort(sortId);
@@ -144,7 +147,7 @@ watch(
   }
 );
 
-const filterProducts = (newFilter: string) => {
+const filterProducts = (newFilter: string | undefined) => {
   if (!originalProducts.value.length) originalProducts.value = products.value;
 
   if (!newFilter) products.value = originalProducts.value;
@@ -167,6 +170,13 @@ const filterByTitle = (product: Product, newFilter: string) =>
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))
   justify-items: center
   grid-gap: 40px
+
+.cards__item
+  transition: outline 0.1s, transform 0.4s
+  &:focus
+    outline: 2px solid rgb(124, 225, 180)
+  &:hover  
+    transform: translate(-10px, -10px)
 
 @media (max-width: 1115px)
   .cards

@@ -2,6 +2,7 @@
   <ul class="sneakers-in-cart__list">
     <li
       class="sneakers-in-cart__item"
+      tabindex="0"
       v-for="cartProduct in cartProducts"
       :key="cartProduct.id"
     >
@@ -19,7 +20,12 @@
         >
       </div>
       <button class="sneakers-in-cart__btn">
-        <my-icon type="cross" @click="removeCartProduct(cartProduct)"></my-icon>
+        <my-icon
+          class="sneakers-in-cart__icon"
+          type="cross"
+          @click="removeCartProduct(cartProduct)"
+        ></my-icon>
+        <span class="visually-hidden">Удалить кроссовки {{ cartProduct.title }} из корзины</span>
       </button>
     </li>
   </ul>
@@ -59,6 +65,9 @@ function removeCartProduct(product: Product) {
 </script>
 
 <style lang="sass" scoped>
+.sneakers-in-cart__btn:focus
+  outline: 2px solid rgb(124, 225, 180)
+
 .sneakers-in-cart__item
   border: 1px solid rgb(243, 243, 243)
   border-radius: 20px
@@ -67,6 +76,8 @@ function removeCartProduct(product: Product) {
   align-items: center
   padding: 20px
   margin-bottom: 20px
+  &:focus
+     outline: 2px solid rgb(124, 225, 180)
 
 .sneakers-in-cart__img
   width: 70px
@@ -82,6 +93,9 @@ function removeCartProduct(product: Product) {
 
 .sneakers-in-cart__btn
   cursor: pointer
+
+.sneakers-in-cart__icon
+  display: flex
 
 .sneakers-in-cart__item
   max-width: 400px

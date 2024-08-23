@@ -18,7 +18,9 @@
           :product="product"
           :changeFavorite="changeFavorite"
           :changeCarts="null"
-        ></my-card>
+          tabindex="0"
+        >
+      </my-card>
       </ul>
     </my-container>
   </div>
@@ -52,6 +54,8 @@ defineComponent({
 });
 
 const changeFavorite = (product: Product): void => {
+  console.log(product.id);
+
   store.commit("bookmarksProducts/removeItemFromBookmarksProduts", product);
 };
 
