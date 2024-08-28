@@ -1,12 +1,13 @@
 <template>
   <li class="cards__item">
+    <span class="visually-hidden">Карточка товара с id {{ product.id }}</span>
     <div class="cards__icon">
-      <span class="visually-hidden">Карточка товара с id {{ product.id }}</span>
       <button
         class="cards__btn"
         @click="changeFavorite(product)"
         @keydown.enter="changeFavorite(product)"
         @keydown.space.prevent="changeFavorite(product)"
+        :aria-label="`Изменить статус избранного для ${product.title}`"
       >
         <my-icon
           class="cards__icon-favorite"
@@ -18,7 +19,6 @@
         >
         </my-icon>
       </button>
-      <span class="visually-hidden">Добавления данного товара в закладки</span>
     </div>
 
     <div class="cards__img">
@@ -45,13 +45,14 @@
       <div class="cards__icon">
         <button
           class="cards__btn"
-          @click="changeCarts(product)"
-          @keydown.enter="changeCarts(product)"
-          @keydown.space.prevent="changeCarts(product)"
+          @click="handleChangeCarts"
+          @keydown.enter="handleChangeCarts"
+          @keydown.space.prevent="handleChangeCarts"
+          :aria-label="`Добавить в корзину ${product.title}`"
         >
           <my-icon
             class="cards__icon-cart"
-            v-if="changeCarts !== null"
+            v-if="changeCarts"
             :type="product.iconOrder"
             :class="{
               'cards__btn-order': product.iconOrder === 'order',
@@ -59,27 +60,38 @@
             }"
           ></my-icon>
         </button>
-        <span class="visually-hidden">Добавить данный товар в корзину</span>
       </div>
     </div>
   </li>
 </template>
 
-<script setup>
-import { defineComponent, defineProps } from "vue";
+<script lang="ts" setup>
+import { defineProps } from "vue";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
 import MyIcon from "@/UI/icon/MyIcon.vue";
 
-defineComponent({
-  components: { MyTypography, MyIcon },
-  name: "MyCard",
-});
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  imageUrl: string;
+  iconOrder: string;
+  iconFavorite: string;
+}
 
-defineProps({
-  product: Object,
-  changeFavorite: Function,
-  changeCarts: Function,
-});
+interface Props {
+  product: Product;
+  changeFavorite: Function;
+  changeCarts?: Function;
+}
+
+const props = defineProps<Props>();
+
+const handleChangeCarts = () => {
+  if (props.changeCarts) {
+    props.changeCarts(props.product);
+  }
+};
 </script>
 
 <style lang="sass" scoped>
@@ -118,50 +130,50 @@ defineProps({
   outline: 2px solid rgb(124, 225, 180)
   border-radius: 5px
 
-.cards__btn-favorite:deep svg:hover
+.cards__btn-favorite:deep( svg:hover )
   fill: #fcf5f5
   & path
     fill: #facaca
 
-.cards__btn-favorite:deep svg:active
+.cards__btn-favorite:deep( svg:active )
   fill: #fad7d7
   & path
     fill: #f77272
     stroke: #f77272
 
-.cards__btn-not-favorite:deep svg:hover
+.cards__btn-not-favorite:deep( svg:hover )
   & rect
     fill: #ffc7c7
     stroke: #facaca
 
-.cards__btn-not-favorite:deep svg:active
+.cards__btn-not-favorite:deep( svg:active )
   fill: #fa9d9d
   & rect
      fill: #fad7d7
 
 
-.cards__btn-order:deep svg:hover
+.cards__btn-order:deep( svg:hover )
   fill: #e6f7e9
   & path
      fill: #7e807e
   & rect
      fill: #e6f7e9
 
-.cards__btn-order:deep svg:active
+.cards__btn-order:deep( svg:active )
   fill: #a1f7b0
   & path
      fill: #fff
   & rect
      fill: #a1f7b0
 
-.cards__btn-not-order:deep svg:hover
+.cards__btn-not-order:deep( svg:hover )
   fill: #a1f7b0
   & path
      fill: #fff
   & rect
      fill: #a1f7b0
 
-.cards__btn-not-order:deep svg:active
+.cards__btn-not-order:deep( svg:active )
   fill: #69f081
   & path
      fill: #fff

@@ -17,10 +17,9 @@
           :key="product.id"
           :product="product"
           :changeFavorite="changeFavorite"
-          :changeCarts="null"
           tabindex="0"
         >
-      </my-card>
+        </my-card>
       </ul>
     </my-container>
   </div>
@@ -44,8 +43,8 @@ interface Product {
 
 const store = useStore();
 
-const bookmarksProducts = computed(
-  (): void => store.getters["bookmarksProducts/bookmarksProducts"]
+const bookmarksProducts = computed<Product[]>(
+  (): Product[] => store.getters["bookmarksProducts/bookmarksProducts"]
 );
 
 defineComponent({
@@ -53,9 +52,7 @@ defineComponent({
   name: "MyBookmarks",
 });
 
-const changeFavorite = (product: Product): void => {
-  console.log(product.id);
-
+const changeFavorite = (product: Product) => {
   store.commit("bookmarksProducts/removeItemFromBookmarksProduts", product);
 };
 

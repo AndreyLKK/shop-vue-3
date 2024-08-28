@@ -18,7 +18,7 @@
     <my-typography class="status__text" tag="p" size="s" height="l">
       {{ status?.description }}
     </my-typography>
-    <button class="status__btn" type="button" @click="$emit('returnToCart')">
+    <button class="status__btn" type="button" @click="emit('returnToCart')">
       <my-typography tag="span" color="white" bold="bold" height="m">
         Вернуться назад
       </my-typography>
@@ -30,13 +30,15 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { defineProps, defineEmits } from "vue";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
 import MyIcon from "@/UI/icon/MyIcon.vue";
 
-const props = defineProps({
-  cartStatus: String,
-});
+interface Props {
+  cartStatus: String;
+}
+
+const props = defineProps<Props>();
 
 interface Status {
   imgUrl: string;
@@ -63,6 +65,8 @@ const cartStatuses: Status[] = [
 const status = cartStatuses.find((status: Status) => {
   return status.cartStatus === props.cartStatus;
 });
+
+const emit = defineEmits(['returnToCart']);
 </script>
 
 <style lang="sass" scoped>

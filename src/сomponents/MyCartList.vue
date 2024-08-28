@@ -19,13 +19,16 @@
           >{{ cartProduct.price }} руб.</my-typography
         >
       </div>
-      <button class="sneakers-in-cart__btn">
-        <my-icon
-          class="sneakers-in-cart__icon"
-          type="cross"
-          @click="removeCartProduct(cartProduct)"
-        ></my-icon>
-        <span class="visually-hidden">Удалить кроссовки {{ cartProduct.title }} из корзины</span>
+      <button
+        class="sneakers-in-cart__btn"
+        @click="removeCartProduct(cartProduct)"
+        @keydown.space.prevent="removeCartProduct(cartProduct)"
+        @keydown.enter="removeCartProduct(cartProduct)"
+      >
+        <my-icon class="sneakers-in-cart__icon" type="cross"></my-icon>
+        <span class="visually-hidden"
+          >Удалить кроссовки {{ cartProduct.title }} из корзины</span
+        >
       </button>
     </li>
   </ul>

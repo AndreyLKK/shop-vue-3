@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script></script>
+<script setup lang="ts"></script>
 
 <style lang="sass" scoped>
 
@@ -17,5 +17,4 @@
 @media (max-width: 820px)
   .container
     padding: 0 30px
-
 </style>

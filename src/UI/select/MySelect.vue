@@ -1,9 +1,9 @@
 <template>
   <select
-  class="select"
+    class="select"
     name="select-product"
-    @change="selectionHandler($event.target.value)"
-    :vlaue="modelValue"
+    @change="selectionHandler"
+    :value="modelValue"
   >
     <option
       class="select__option"
@@ -16,16 +16,14 @@
   </select>
 </template>
 
-<script setup>
-import { defineComponent, defineProps, defineEmits } from "vue";
+<script lang="ts" setup>
+import { defineProps, defineEmits } from "vue";
 
-defineComponent({
-  name: "MySelect",
-});
+interface Props {
+  modelValue: String;
+}
 
-defineProps({
-  modelValue: String,
-});
+defineProps<Props>();
 
 const sortingOptions = [
   {
@@ -44,8 +42,8 @@ const sortingOptions = [
 
 const emit = defineEmits(["update:modelValue"]);
 
-const selectionHandler = (value) => {
-  emit("update:modelValue", value);
+const selectionHandler = (evt: Event) => {
+  emit("update:modelValue", (evt.target as HTMLInputElement).value);
 };
 </script>
 

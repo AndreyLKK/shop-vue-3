@@ -1,7 +1,7 @@
 <template>
   <div class="cart" v-show="isCartOpen">
     <div class="cart__backdrop" ref="backdrop"></div>
-    <transition name="cart__windows" ref="modalContent">
+    <div name="cart__windows" ref="modalContent">
       <div class="cart__window" @click.stop>
         <div class="cart__title">
           <button
@@ -13,7 +13,9 @@
             @keydown.space.prevent="toggleCart"
           >
             <my-icon class="cart__icon" type="back-cart-arrow"></my-icon>
-            <span class="visually-hidden">Закрыть окно корзины, вернуться назад</span>
+            <span class="visually-hidden"
+              >Закрыть окно корзины, вернуться назад</span
+            >
           </button>
 
           <my-typography tag="p" size="l" height="l" bold="bold" color="black">
@@ -48,7 +50,7 @@
           ></my-cart-status>
         </div>
       </div>
-    </transition>
+    </div>
   </div>
 </template>
 
@@ -61,6 +63,7 @@ import MyCartList from "@/сomponents/MyCartList.vue";
 import MyCartPrice from "@/сomponents/MyCartPrice.vue";
 import MyOrderConfirmation from "@/сomponents/MyOrderConfirmation.vue";
 import MyCartStatus from "@/сomponents/MyCartStatus.vue";
+import { getFromLocalStorage } from "@/helpers/localStorage";
 
 interface Product {
   id: number;
@@ -81,9 +84,30 @@ const cartProducts = computed(() => store.getters["cartProducts/cartProducts"]);
 
 const emptyingTheTrash = () => store.commit("cartProducts/emptyingTheTrash");
 
+const setOrderProcessed = () =>
+  store.commit("cartProducts/setOrderProcessed", true);
+
 const backdrop = ref<HTMLElement | null>(null);
 
 const arrow = ref<HTMLElement | null>(null);
+
+let orderIsProcessed = computed(
+  () => store.getters["cartProducts/orderIsProcessed"]
+);
+
+watch(orderIsProcessed, async (statusCart) => {
+  if (statusCart) {
+    await nextTick();
+    arrow.value?.focus();
+    trapFocus();
+  }
+});
+
+function placingOrder() {
+  emptyingTheTrash();
+  setOrderProcessed();
+  alert("Заказ офромлен");
+}
 
 watch(isCartOpen, async (open) => {
   if (open) {
@@ -96,10 +120,7 @@ watch(isCartOpen, async (open) => {
 onMounted(() => {
   document.addEventListener("click", handleClickOutside);
 
-  const purchaseDataString = localStorage.getItem("purchase");
-  const localStoragePurchaseData = purchaseDataString
-    ? JSON.parse(purchaseDataString)
-    : [];
+  const localStoragePurchaseData = getFromLocalStorage("purchase");
 
   localStoragePurchaseData.forEach((element: Product) =>
     cartProducts.value.push(element)
@@ -111,16 +132,6 @@ function handleClickOutside(event: any) {
     toggleCart();
   }
 }
-
-const orderIsProcessed = ref<boolean | null>(false);
-
-watch(orderIsProcessed, async (statusCart) => {
-  if (statusCart) {
-    await nextTick();
-    arrow.value?.focus();
-    trapFocus();
-  }
-});
 
 const modalContent = ref<HTMLElement | null>(null);
 
@@ -134,26 +145,20 @@ const trapFocus = () => {
       const firstElement = focusableElements[0];
       const lastElement = focusableElements[focusableElements.length - 1];
 
-      const handleTab = (event: KeyboardEvent) => {
-        console.log(event);
-
-        if (event.key === "Tab") {
-          if (document.activeElement === lastElement) {
-            event.preventDefault();
-            firstElement.focus();
+      if (firstElement instanceof HTMLButtonElement) {
+        const handleTab = (event: KeyboardEvent) => {
+          if (event.key === "Tab") {
+            if (document.activeElement === lastElement) {
+              event.preventDefault();
+              firstElement.focus();
+            }
           }
-        }
-      };
-      document.addEventListener("keydown", handleTab);
+        };
+        document.addEventListener("keydown", handleTab);
+      }
     }
   }
 };
-
-function placingOrder() {
-  emptyingTheTrash();
-  orderIsProcessed.value = true;
-  alert("Заказ офромлен");
-}
 </script>
 
 <style lang="sass" scoped>

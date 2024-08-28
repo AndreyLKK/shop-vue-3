@@ -9,12 +9,11 @@
     <my-navigation-menu
       class="drop-down-menu__list"
       @click="toggleDropMenu"
-  
     ></my-navigation-menu>
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { defineComponent, defineEmits } from "vue";
 import MyIcon from "@/UI/icon/MyIcon.vue";
 import MyTypography from "@/UI/Typography/MyTypography.vue";
@@ -25,7 +24,9 @@ defineComponent({
   name: "MyDropDownMenu",
 });
 
-const emit = defineEmits(["eventToggleDropMenu"]);
+const emit = defineEmits<{
+  eventToggleDropMenu: [];
+}>();
 
 const toggleDropMenu = () => {
   emit("eventToggleDropMenu");
@@ -70,5 +71,4 @@ const toggleDropMenu = () => {
 .drop-down-menu__icon
   transform: rotate(180deg)
   display: flex
- 
 </style>

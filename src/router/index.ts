@@ -1,8 +1,8 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import MyBookmarks from "@/сomponents/MyBookmarks.vue";
 import MyHome from "@/pages/MyHome.vue";
 
-const routes = [
+const routes: RouteRecordRaw[] = [ 
   {
     path: "/",
     name: "home",

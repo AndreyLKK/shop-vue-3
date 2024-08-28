@@ -9,7 +9,7 @@
       :placeholder="placeholder"
       type="text"
       :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
+      @input="handlerInput"
     />
     <div v-if="iconPosition === 'right'" class="icon-right">
       <slot name="iconRight"></slot>
@@ -17,27 +17,26 @@
   </div>
 </template>
 
-<script setup>
-import { defineComponent, defineProps } from "vue";
+<script lang="ts" setup>
+import { defineComponent, defineProps, defineEmits } from "vue";
 
 defineComponent({
   name: "MyInput",
 });
 
-defineProps({
-  placeholder: {
-    type: String,
-    require: false,
-  },
+interface Props {
+  placeholder: string;
+  iconPosition: string;
+  modelValue: string;
+}
 
-  iconPosition: {
-    type: String,
-  },
+defineProps<Props>();
 
-  modelValue: {
-    type: String,
-  },
-});
+const emit = defineEmits(["update:modelValue"]);
+
+const handlerInput = (event: Event) => {
+  emit("update:modelValue", (event.target as HTMLInputElement).value);
+};
 </script>
 
 <style lang="sass" scoped>

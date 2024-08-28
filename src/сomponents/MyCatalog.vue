@@ -55,10 +55,9 @@ defineComponent({
   name: "MyCatalog",
 });
 
-const filter = ref<string>("");
+const filter = ref<string>('');
 
 const sortingOption = ref<string>("standart");
-
 </script>
 
 <style lang="sass" scoped>

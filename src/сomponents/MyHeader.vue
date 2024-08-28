@@ -85,7 +85,7 @@ const toggleDropMenu = (): void => {
   transition: outline 0.1s ease
 
 .header__logo-link:focus
-  outline: 2px solid rgb(124, 225, 180)  
+  outline: 2px solid rgb(124, 225, 180)
   border-radius: 4px
 
 .header__logo

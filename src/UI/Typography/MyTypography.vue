@@ -14,33 +14,22 @@
   </component>
 </template>
 
-<script>
-export default {
-  props: {
-    tag: {
-      type: String,
-      default: "p",
-    },
+<script lang="ts" setup>
+import { defineProps, withDefaults } from "vue";
 
-    bold: {
-      type: String,
-    },
+interface Props {
+  tag?: string;
+  bold?: string;
+  size?: string;
+  color?: string;
+  height?: string;
+}
 
-    size: {
-      type: String,
-      default: "s",
-    },
-
-    color: {
-      type: String,
-      default: "primary",
-    },
-
-    height: {
-      type: String,
-    },
-  },
-};
+withDefaults(defineProps<Props>(), {
+  tag: "p",
+  size: "s",
+  color: "primary",
+});
 </script>
 
 <style lang="sass">
@@ -102,5 +91,4 @@ export default {
 
 .height_xxl
   line-height: 39px
-
 </style>

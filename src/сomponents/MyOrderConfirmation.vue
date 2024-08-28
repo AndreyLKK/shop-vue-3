@@ -1,5 +1,5 @@
 <template>
-  <button class="footer-confirmation__btn" @click="placingOrder">
+  <button class="footer-confirmation__btn" @click="emit('eventPlacingOrder')">
     <my-typography tag="span" color="white" bold="bold" size="s" height="m"
       >Оформить заказ</my-typography
     >
@@ -19,11 +19,7 @@ defineComponent({
   name: "MyOrderConfirmation",
 });
 
-const emits = defineEmits(["eventPlacingOrder"]);
-
-const placingOrder = () => {
-  emits("eventPlacingOrder");
-};
+const emit = defineEmits(["eventPlacingOrder"]);
 </script>
 
 <style lang="sass" scoped>
