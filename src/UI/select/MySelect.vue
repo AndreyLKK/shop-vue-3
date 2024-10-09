@@ -53,7 +53,7 @@ const selectionHandler = (evt: Event) => {
   border: 1px solid rgb(243, 243, 243)
   background-color: #f6f6f6
   border-radius: 5px
-  color: rgb(157, 157, 157)
+  color: rgb(196, 196, 196)
   font-size: 16px
   width: 100%
   cursor: pointer

@@ -12,14 +12,15 @@
           >Все кроссовки</my-typography
         >
         <div class="catalog__actions">
-          <div class="catalog__drop-list">
+          <div class="catalog__actions-item catalog__drop-list">
             <my-select
               class="catalog__select"
               v-model="sortingOption"
               tabindex="0"
             ></my-select>
+            <my-icon class="catalog__select-icon" type="select-arrow"></my-icon>
           </div>
-          <div class="catalog__inner-input">
+          <div class="catalog__actions-item catalog__inner-input">
             <my-input
               class="catalog__input"
               placeholder="Поиск..."
@@ -69,11 +70,22 @@ const sortingOption = ref<string>("standart");
   display: flex
   align-items: center
   justify-content: space-between
-  grid-gap: 15px
 
 .catalog__actions
   display: flex
-  grid-gap: 40px
+
+.catalog__drop-list
+  position: relative
+
+.catalog__actions-item:not(:last-child)
+  margin-right: 40px
+
+.catalog__select-icon
+  position: absolute
+  top: 50%
+  transform: translateY(-35%)
+  right: 10px
+  pointer-events: none  
 
 .catalog__inner-input
   max-width: 250px
@@ -83,8 +95,8 @@ const sortingOption = ref<string>("standart");
   .catalog__text
     font-size: 30px
 
-  .catalog__actions
-    grid-gap: 20px
+  .catalog__actions-item:not(:last-child)
+    margin-right: 20px
 
 @media (max-width: 830px)
   .catalog
@@ -93,14 +105,23 @@ const sortingOption = ref<string>("standart");
   .catalog__actions
     flex-direction: column-reverse
 
+  .catalog__actions-item:not(:last-child)
+    margin-right: 0px
+    margin-top: 20px  
+
   .catalog__inner
     justify-content: space-around
 
   .catalog__text
+    margin-right: 20px
     min-width: 220px
 
 
 @media (max-width: 480px)
   .catalog__inner
     flex-direction: column
+
+  .catalog__text
+    margin-right: 0px
+    margin-bottom: 20px  
 </style>

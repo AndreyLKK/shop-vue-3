@@ -75,8 +75,9 @@ const handlerInput = (event: Event) => {
 
 .input-container .icon-left
   left: 18px
-
+  pointer-events: none
 
 .input-container .icon-right
   right: 18px
+  pointer-events: none
 </style>

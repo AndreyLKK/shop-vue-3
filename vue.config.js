@@ -2,7 +2,7 @@ const { defineConfig } = require("@vue/cli-service");
 const webpack = require("webpack");
 
 module.exports = defineConfig({
-  publicPath: "/",
+  publicPath: process.env.NODE_ENV === "production" ? "/shop-vue-3/" : "/",
   configureWebpack: {
     plugins: [
       new webpack.DefinePlugin({

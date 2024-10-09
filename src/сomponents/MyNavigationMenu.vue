@@ -97,16 +97,16 @@ const totalPrice = computed(
 .navigation-menu__list
   display: flex
   align-items: flex-start
-  grid-gap: 32px
 
 .navigation-menu__item
   text-align: center
+  &:not(:last-child)
+    margin-right: 32px
 
 .navigation-menu__btn,
 .navigation-menu__link
   transition: outline 0.1s, text-shadow 0.1s, color 0.1s
   display: flex
-  grid-gap: 8px
   align-items: center
   &:hover
     text-shadow: .4px 0px 0px #818181, -.4px 0px 0px #818181
@@ -121,6 +121,7 @@ const totalPrice = computed(
 .navigation-menu__icon
   display: flex  
   align-items: center
+  margin-right: 8px
 
 @media (max-width: 768px)
  .navigation-menu__list
